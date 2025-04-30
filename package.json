@@ -1,8 +1,8 @@
 {
-  "name": "demos-root",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "start:frontend:angular-todos": "cd frontends/angular-todos && npm start"
-  }
+    "name": "demos-root",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "start:frontend:angular-todos": "cd frontends/angular-todos && npm start"
+    }
 }
