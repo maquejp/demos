@@ -11,17 +11,13 @@
     <button (click)="addTodo()">Add</button>
   </div>
 
-  <ul class="todo-list">
+  <div class="todo-list">
     @for (todo of todos; track todo.id) {
-    <li [class.completed]="todo.completed">
-      <input
-        type="checkbox"
-        [checked]="todo.completed"
-        (change)="toggleTodo(todo)"
-      />
-      <span>{{ todo.title }}</span>
-      <button (click)="deleteTodo(todo.id)">Delete</button>
-    </li>
+    <app-todo-item
+      [todo]="todo"
+      (toggleComplete)="toggleTodo($event)"
+      (delete)="deleteTodo($event)"
+    />
     }
-  </ul>
+  </div>
 </div>

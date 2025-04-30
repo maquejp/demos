@@ -1,0 +1,40 @@
+.todo-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  gap: 10px;
+}
+
+:host:last-child .todo-item {
+  border-bottom: none;
+}
+
+.todo-item.completed span {
+  text-decoration: line-through;
+  color: #888;
+}
+
+span {
+  flex: 1;
+}
+
+button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  background-color: #bb2d3b;
+}
+
+input[type="checkbox"] {
+  margin: 0;
+  width: 18px;
+  height: 18px;
+}

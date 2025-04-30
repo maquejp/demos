@@ -26,7 +26,7 @@
   font-size: 16px;
 }
 
-button {
+.add-todo button {
   background-color: #0066cc;
   color: white;
   border: none;
@@ -36,48 +36,11 @@ button {
   font-size: 16px;
 }
 
-button:hover {
+.add-todo button:hover {
   background-color: #0052a3;
 }
 
 .todo-list {
   list-style: none;
   padding: 0;
-}
-
-.todo-list li {
-  display: flex;
-  align-items: center;
-  padding: 12px;
-  border-bottom: 1px solid #eee;
-  gap: 10px;
-}
-
-.todo-list li:last-child {
-  border-bottom: none;
-}
-
-.todo-list li.completed span {
-  text-decoration: line-through;
-  color: #888;
-}
-
-.todo-list li span {
-  flex: 1;
-}
-
-.todo-list li button {
-  background-color: #dc3545;
-  padding: 6px 12px;
-  font-size: 14px;
-}
-
-.todo-list li button:hover {
-  background-color: #bb2d3b;
-}
-
-.todo-list li input[type="checkbox"] {
-  margin: 0;
-  width: 18px;
-  height: 18px;
 }

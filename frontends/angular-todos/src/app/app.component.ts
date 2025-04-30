@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TodoItemComponent } from './todo-item/todo-item.component';
 
 interface Todo {
   id: number;
@@ -11,7 +12,7 @@ interface Todo {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TodoItemComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
