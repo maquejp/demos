@@ -3,9 +3,34 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-todos": {
+    "angular-todo-app": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:component": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -13,7 +38,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/angular-todos",
+            "outputPath": "dist/angular-todo-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -24,11 +49,6 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              },
-              {
-                "glob": "todos.json",
-                "input": "src/app",
-                "output": "app"
               }
             ],
             "styles": [
@@ -64,10 +84,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-todos:build:production"
+              "buildTarget": "angular-todo-app:build:production"
             },
             "development": {
-              "buildTarget": "angular-todos:build:development"
+              "buildTarget": "angular-todo-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -87,11 +107,6 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              },
-              {
-                "glob": "todos.json",
-                "input": "src/app",
-                "output": "app"
               }
             ],
             "styles": [
