@@ -1,49 +1,36 @@
-Create a responsive Todo web application using Angular (v19+) and Tailwind CSS with the following requirements:
+Starting from the base project (angular-todo-app), create a responsive Todo web application using Angular v19+ and Tailwind CSS with the following specifications:
 
-From the base project created angular-todo-app in the folder frontend.
+Core Features:
+- CRUD operations for todo items (title, description, due date, priority)
+- Persistent data storage using local storage
+- Filter and sort todos by status, priority, and due date
+- Responsive design for mobile, tablet, and desktop viewports
 
-1. Core Features:
-- Add new todos with title and optional description
-- Mark todos as complete/incomplete
-- Edit existing todos
-- Delete todos
-- Filter todos by status (All/Active/Completed)
-- Persist todos in browser localStorage
+Technical Requirements:
+- Use Angular v19+ standalone components
+- Implement Angular Signals for state management
+- Utilize Tailwind CSS for styling and responsive design
+- Follow Angular best practices and coding standards
+- Include proper TypeScript types and interfaces
+- Implement error handling and loading states
+- Add form validation using Angular's reactive forms
 
-2. Technical Specifications:
-- Use Angular standalone components
-- Do not use inline html templates
-- Implement proper TypeScript interfaces
-- Follow Angular best practices and style guide
-- Ensure mobile-first responsive design
-- Include proper error handling
-- Avoid any prompts for the project creation when using the Angular CLI
+Architecture:
+- Component-based architecture
+- Service layer for data management
+- Type-safe models and interfaces
+- Modular design with lazy loading
 
-3. Styling:
-- Use Tailwind CSS 4.x for styling (No custom CSS)
+Bonus Features:
+- Dark/light theme support
+- Keyboard shortcuts
+- Data export/import functionality
+- Unit tests using Jasmine/Karma
 
-4. Component Structure:
-- TodoContainer (smart component)
-- TodoList (presentation component)
-- TodoItem (presentation component)
-- TodoForm (presentation component)
-- TodoFilter (presentation component)
+Deliverables:
+- Working application code
+- README with setup instructions
+- Basic documentation
+- Git repository with meaningful commits
 
-5. State Management:
-- Use Angular signals for state management
-- Implement proper data flow using Input/Output decorators
-- Create a TodoService for business logic
-
-6. Acceptance Criteria:
-- Application loads without errors
-- All CRUD operations work as expected
-- Data persists after page refresh
-- UI is responsive across devices
-- Code follows Angular coding standards
-- Components are properly tested
-
-7. Testing:
-- Write unit tests for all components and services
-- Use Angular testing utilities
-
-Please provide a working implementation adhering to these specifications.
+Reference the official Angular documentation (https://angular.dev) and Tailwind CSS documentation (https://tailwindcss.com) for implementation guidelines.
