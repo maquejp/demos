@@ -19,8 +19,16 @@ import { Todo } from '../../types/todo.types';
 })
 export class TodoListComponent {
   editingTodo = signal<Todo | null>(null);
+  loading = signal<boolean>(false);
 
   constructor(public todoService: TodoService) {}
+
+  onAddTodo(): void {
+    // Clear any editing state
+    this.editingTodo.set(null);
+    // Scroll to the form smoothly
+    document.querySelector('.mb-8')?.scrollIntoView({ behavior: 'smooth' });
+  }
 
   onSaveTodo(
     todoData: Omit<Todo, 'id' | 'createdAt' | 'updatedAt' | 'status'>

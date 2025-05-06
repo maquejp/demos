@@ -14,6 +14,13 @@ export class TodoItemComponent {
   @Output() edit = new EventEmitter<Todo>();
   @Output() delete = new EventEmitter<string>();
 
+  isOverdue(todo: Todo): boolean {
+    if (!todo.dueDate || todo.status === 'completed') {
+      return false;
+    }
+    return todo.dueDate.getTime() < new Date().getTime();
+  }
+
   getPriorityClass(): string {
     const baseClasses = 'px-2 py-1 text-xs font-medium rounded-full';
     switch (this.todo.priority) {

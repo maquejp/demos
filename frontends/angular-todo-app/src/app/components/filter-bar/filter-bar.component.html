@@ -1,91 +1,85 @@
-<div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow mb-4">
+<div
+  class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 mb-6 border border-gray-100 dark:border-gray-700"
+>
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="relative">
+      <div
+        class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+      >
+        <svg
+          class="h-5 w-5 text-gray-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          />
+        </svg>
+      </div>
+      <input
+        type="text"
+        [formControl]="searchControl"
+        placeholder="Search todos..."
+        class="block w-full pl-10 pr-3 py-2.5 border border-gray-200 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+      />
+    </div>
+
     <div>
-      <label
-        for="status"
-        class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-        >Status</label
-      >
       <select
-        id="status"
-        [(ngModel)]="filters.status"
-        (ngModelChange)="onFilterChange()"
-        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        [formControl]="statusControl"
+        class="block w-full py-2.5 px-3 border border-gray-200 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
       >
-        <option value="all">All</option>
+        <option value="all">All Status</option>
         <option value="active">Active</option>
         <option value="completed">Completed</option>
       </select>
     </div>
 
     <div>
-      <label
-        for="priority"
-        class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-        >Priority</label
-      >
       <select
-        id="priority"
-        [(ngModel)]="filters.priority"
-        (ngModelChange)="onFilterChange()"
-        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        [formControl]="priorityControl"
+        class="block w-full py-2.5 px-3 border border-gray-200 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
       >
-        <option value="all">All</option>
+        <option value="all">All Priorities</option>
         <option value="high">High</option>
         <option value="medium">Medium</option>
         <option value="low">Low</option>
       </select>
     </div>
 
-    <div>
-      <label
-        for="sortBy"
-        class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-        >Sort By</label
-      >
+    <div class="flex space-x-2">
       <select
-        id="sortBy"
-        [(ngModel)]="filters.sortBy"
-        (ngModelChange)="onFilterChange()"
-        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        [formControl]="sortByControl"
+        class="block flex-1 py-2.5 px-3 border border-gray-200 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
       >
         <option value="dueDate">Due Date</option>
         <option value="priority">Priority</option>
         <option value="title">Title</option>
       </select>
-    </div>
 
-    <div>
-      <label
-        for="sortOrder"
-        class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-        >Order</label
+      <button
+        (click)="toggleSortOrder()"
+        class="px-3 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
       >
-      <select
-        id="sortOrder"
-        [(ngModel)]="filters.sortOrder"
-        (ngModelChange)="onFilterChange()"
-        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-      >
-        <option value="asc">Ascending</option>
-        <option value="desc">Descending</option>
-      </select>
+        <svg
+          class="w-5 h-5"
+          [class.rotate-180]="sortOrderControl.value === 'desc'"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"
+          />
+        </svg>
+      </button>
     </div>
-  </div>
-
-  <div class="mt-4">
-    <label
-      for="search"
-      class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-      >Search</label
-    >
-    <input
-      type="text"
-      id="search"
-      [(ngModel)]="filters.searchTerm"
-      (ngModelChange)="onFilterChange()"
-      placeholder="Search todos..."
-      class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-    />
   </div>
 </div>

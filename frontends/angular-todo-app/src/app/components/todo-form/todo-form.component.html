@@ -1,24 +1,24 @@
 <form
   [formGroup]="todoForm"
   (ngSubmit)="onSubmit()"
-  class="space-y-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow"
+  class="space-y-6 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg backdrop-blur-sm border border-gray-100 dark:border-gray-700"
 >
   <div>
     <label
       for="title"
-      class="block text-sm font-medium text-gray-700 dark:text-gray-200"
+      class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2"
       >Title</label
     >
     <input
       type="text"
       id="title"
       formControlName="title"
-      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      class="w-full px-4 py-2.5 rounded-lg border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white transition duration-200"
       [class.border-red-500]="todoForm.get('title')?.errors?.['required'] && todoForm.get('title')?.touched"
     />
     <div
       *ngIf="todoForm.get('title')?.errors?.['required'] && todoForm.get('title')?.touched"
-      class="text-red-500 text-sm mt-1"
+      class="text-red-500 text-sm mt-2 font-medium"
     >
       Title is required
     </div>
@@ -27,33 +27,33 @@
   <div>
     <label
       for="description"
-      class="block text-sm font-medium text-gray-700 dark:text-gray-200"
+      class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2"
       >Description</label
     >
     <textarea
       id="description"
       formControlName="description"
       rows="3"
-      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      class="w-full px-4 py-2.5 rounded-lg border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white transition duration-200"
     ></textarea>
   </div>
 
   <div>
     <label
       for="dueDate"
-      class="block text-sm font-medium text-gray-700 dark:text-gray-200"
+      class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2"
       >Due Date</label
     >
     <input
       type="datetime-local"
       id="dueDate"
       formControlName="dueDate"
-      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      class="w-full px-4 py-2.5 rounded-lg border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white transition duration-200"
       [class.border-red-500]="todoForm.get('dueDate')?.errors?.['required'] && todoForm.get('dueDate')?.touched"
     />
     <div
       *ngIf="todoForm.get('dueDate')?.errors?.['required'] && todoForm.get('dueDate')?.touched"
-      class="text-red-500 text-sm mt-1"
+      class="text-red-500 text-sm mt-2 font-medium"
     >
       Due date is required
     </div>
@@ -62,13 +62,13 @@
   <div>
     <label
       for="priority"
-      class="block text-sm font-medium text-gray-700 dark:text-gray-200"
+      class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2"
       >Priority</label
     >
     <select
       id="priority"
       formControlName="priority"
-      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      class="w-full px-4 py-2.5 rounded-lg border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white transition duration-200"
     >
       <option value="low">Low</option>
       <option value="medium">Medium</option>
@@ -76,18 +76,18 @@
     </select>
   </div>
 
-  <div class="flex justify-end space-x-3">
+  <div class="flex justify-end space-x-4 pt-4">
     <button
       type="button"
       (click)="onCancel()"
-      class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-600"
+      class="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-600 transition duration-200 focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-600"
     >
       Cancel
     </button>
     <button
       type="submit"
       [disabled]="!todoForm.valid"
-      class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+      class="px-6 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 border border-transparent rounded-lg shadow-sm transition duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:from-blue-500 disabled:hover:to-blue-600"
     >
       {{ editMode() ? "Update" : "Add" }} Todo
     </button>
