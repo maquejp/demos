@@ -14,6 +14,7 @@ Technical Requirements:
 - Include proper TypeScript types and interfaces
 - Implement error handling and loading states
 - Add form validation using Angular's reactive forms
+- Use html files not inline templates
 
 Architecture:
 - Component-based architecture

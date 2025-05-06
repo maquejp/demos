@@ -1,0 +1,91 @@
+<div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow mb-4">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div>
+      <label
+        for="status"
+        class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
+        >Status</label
+      >
+      <select
+        id="status"
+        [(ngModel)]="filters.status"
+        (ngModelChange)="onFilterChange()"
+        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      >
+        <option value="all">All</option>
+        <option value="active">Active</option>
+        <option value="completed">Completed</option>
+      </select>
+    </div>
+
+    <div>
+      <label
+        for="priority"
+        class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
+        >Priority</label
+      >
+      <select
+        id="priority"
+        [(ngModel)]="filters.priority"
+        (ngModelChange)="onFilterChange()"
+        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      >
+        <option value="all">All</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+    </div>
+
+    <div>
+      <label
+        for="sortBy"
+        class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
+        >Sort By</label
+      >
+      <select
+        id="sortBy"
+        [(ngModel)]="filters.sortBy"
+        (ngModelChange)="onFilterChange()"
+        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      >
+        <option value="dueDate">Due Date</option>
+        <option value="priority">Priority</option>
+        <option value="title">Title</option>
+      </select>
+    </div>
+
+    <div>
+      <label
+        for="sortOrder"
+        class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
+        >Order</label
+      >
+      <select
+        id="sortOrder"
+        [(ngModel)]="filters.sortOrder"
+        (ngModelChange)="onFilterChange()"
+        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      >
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <label
+      for="search"
+      class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
+      >Search</label
+    >
+    <input
+      type="text"
+      id="search"
+      [(ngModel)]="filters.searchTerm"
+      (ngModelChange)="onFilterChange()"
+      placeholder="Search todos..."
+      class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+    />
+  </div>
+</div>

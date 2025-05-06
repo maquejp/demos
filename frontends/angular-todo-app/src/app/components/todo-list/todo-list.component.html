@@ -1,0 +1,44 @@
+<div class="max-w-5xl mx-auto p-4">
+  <div class="mb-8">
+    <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+      Add New Todo
+    </h2>
+    <app-todo-form
+      [todo]="editingTodo()"
+      (save)="onSaveTodo($event)"
+      (update)="onUpdateTodo($event)"
+      (cancel)="onCancelEdit()"
+    ></app-todo-form>
+  </div>
+
+  <div class="mb-6">
+    <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+      Filter Todos
+    </h2>
+    <app-filter-bar></app-filter-bar>
+  </div>
+
+  <div class="mb-4">
+    <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+      Todo List
+      <span class="text-sm font-normal text-gray-600 dark:text-gray-400">
+        ({{ todoService.filteredTodos().length }} items)
+      </span>
+    </h2>
+  </div>
+
+  <div class="space-y-4">
+    @if (todoService.filteredTodos().length === 0) {
+    <div class="text-center py-8 text-gray-500 dark:text-gray-400">
+      No todos found. Add some tasks to get started!
+    </div>
+    } @else { @for (todo of todoService.filteredTodos(); track todo.id) {
+    <app-todo-item
+      [todo]="todo"
+      (toggleStatus)="onToggleStatus($event)"
+      (edit)="onEditTodo($event)"
+      (delete)="onDeleteTodo($event)"
+    ></app-todo-item>
+    } }
+  </div>
+</div>
