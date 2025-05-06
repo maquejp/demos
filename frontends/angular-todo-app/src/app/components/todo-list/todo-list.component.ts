@@ -20,25 +20,33 @@ import { Todo } from '../../types/todo.types';
 export class TodoListComponent {
   editingTodo = signal<Todo | null>(null);
   loading = signal<boolean>(false);
+  showForm = signal<boolean>(false);
 
   constructor(public todoService: TodoService) {}
 
   onAddTodo(): void {
-    // Clear any editing state
+    // Clear any editing state and show the form
     this.editingTodo.set(null);
-    // Scroll to the form smoothly
-    document.querySelector('.mb-8')?.scrollIntoView({ behavior: 'smooth' });
+    this.showForm.set(true);
+    // Wait for next tick to ensure the form is rendered
+    setTimeout(() => {
+      document
+        .querySelector('.todo-form')
+        ?.scrollIntoView({ behavior: 'smooth' });
+    }, 0);
   }
 
   onSaveTodo(
     todoData: Omit<Todo, 'id' | 'createdAt' | 'updatedAt' | 'status'>
   ): void {
     this.todoService.addTodo(todoData);
+    this.showForm.set(false);
   }
 
   onUpdateTodo({ id, updates }: { id: string; updates: Partial<Todo> }): void {
     this.todoService.updateTodo(id, updates);
     this.editingTodo.set(null);
+    this.showForm.set(false);
   }
 
   onToggleStatus(id: string): void {
@@ -47,6 +55,13 @@ export class TodoListComponent {
 
   onEditTodo(todo: Todo): void {
     this.editingTodo.set(todo);
+    this.showForm.set(true);
+    // Wait for next tick to ensure the form is rendered
+    setTimeout(() => {
+      document
+        .querySelector('.todo-form')
+        ?.scrollIntoView({ behavior: 'smooth' });
+    }, 0);
   }
 
   onDeleteTodo(id: string): void {
@@ -55,5 +70,6 @@ export class TodoListComponent {
 
   onCancelEdit(): void {
     this.editingTodo.set(null);
+    this.showForm.set(false);
   }
 }
