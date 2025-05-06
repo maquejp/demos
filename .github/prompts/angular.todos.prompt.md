@@ -34,3 +34,5 @@ Deliverables:
 - Git repository with meaningful commits
 
 Reference the official Angular documentation (https://angular.dev) and Tailwind CSS documentation (https://tailwindcss.com) for implementation guidelines.
+
+DO NOT CHANGE THE TAILWIND CONFIGURATION!
