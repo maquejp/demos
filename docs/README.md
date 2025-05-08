@@ -8,13 +8,6 @@ To get started with the documentation:
 1. Navigate to specific implementation documentation in their respective folders
 2. Follow the implementation-specific guides for setup and development
 
-## Structure
-
-The documentation follows a standard structure:
-- `apis/` - API implementation documentation
-- `databases/` - Database implementation documentation
-- `frontends/` - Frontend implementation documentation
-
 ## Contributing
 
 We welcome contributions! Please read our [Contributing Guidelines](../CONTRIBUTING.md) for details on how to submit pull requests, report issues, and contribute to the project.
