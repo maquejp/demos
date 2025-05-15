@@ -141,3 +141,13 @@
   - Query optimization
   - Error handling and retries
   - Migration management
+
+## UI Mockups
+
+### Home Screen
+![Todo Home Screen](TODO_SCREEN_HOME.png)
+
+
+### Add Task Screen
+![Todo Add Screen](TODO_SCREEN_ADD.png)
+
