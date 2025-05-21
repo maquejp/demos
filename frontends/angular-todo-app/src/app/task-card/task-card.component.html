@@ -1,9 +1,14 @@
-<div class="m-4 p-4 bg-blue-400 flex flex-col gap-2 rounded-lg min-h-[200px]">
+<div class="m-4 p-4 retro-card flex flex-col gap-2 rounded-lg min-h-[200px]">
   <div class="flex justify-between items-center">
-    <h3 class="text-lg font-semibold text-white">{{ task.title }}</h3>
+    <h3 class="text-lg font-semibold neon-text">{{ task.title }}</h3>
   </div>
   <p class="text-white">{{ task.description }}</p>
   <div class="text-sm text-white/80">
     Due: {{ task.dueDate | date : "mediumDate" }}
+  </div>
+  <div class="mt-auto">
+    <button class="retro-button px-4 py-2 rounded-lg text-sm">
+      Complete Task
+    </button>
   </div>
 </div>
