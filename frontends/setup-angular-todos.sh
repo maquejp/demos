@@ -5,7 +5,7 @@ mkdir -p angular-todo-app
 cd angular-todo-app
 
 # Create new Angular project with minimal setup and standalone components
-ng new angular-todo-app --standalone --routing --ssr=false --style=css --skip-tests --skip-git --directory=. <<EOF
+ng new angular-todo-app --standalone --ssr=false --style=css --skip-tests --skip-git --directory=. <<EOF
 EOF
 
 # Install Tailwind CSS and its peer dependencies as per official docs
@@ -35,17 +35,5 @@ echo '<div
     Click Me
   </button>
 </div>
+<router-outlet />
 ' > src/app/app.component.html
-
-echo "import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-root',
-  imports: [],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
-})
-export class AppComponent {
-  title = 'angular-todo-app';
-}
-" > src/app/app.component.ts
