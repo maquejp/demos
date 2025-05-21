@@ -1,0 +1,4 @@
+.neon-text {
+  text-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink),
+    0 0 20px var(--neon-pink);
+}
