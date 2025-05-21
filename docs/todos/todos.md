@@ -145,13 +145,13 @@
 ## UI Mockups
 
 ### Home Screen
-![Todo Home Screen](TODO_SCREEN_HOME.png)
+![Todo Home Screen](./images/TODO_SCREEN_HOME.png)
 
 
 ### Add Task Screen
-![Todo Add Screen](TODO_SCREEN_ADD.png)
+![Todo Add Screen](./images/TODO_SCREEN_ADD.png)
 
 
 ### Update Task Screen
-![Todo Update Screen](TODO_SCREEN_UPDATE.png)
+![Todo Update Screen](./images/TODO_SCREEN_UPDATE.png)
 
