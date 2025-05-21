@@ -18,7 +18,6 @@
 }
 
 .retro-button:hover {
-  background: var(--neon-green);
-  color: var(--dark-bg);
-  box-shadow: 0 0 10px var(--neon-green);
+  color: var(--neon-blue);
+  text-shadow: 0 0 5px var(--neon-blue);
 }
