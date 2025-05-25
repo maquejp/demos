@@ -17,4 +17,5 @@ body {
   margin: 0;
   font-family: var(--font-display);
   color: var(--body-color);
+  font-size: 12px;
 }
