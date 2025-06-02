@@ -1,13 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { DatePipe } from '@angular/common';
-
-interface Task {
-  id: number;
-  title: string;
-  description: string;
-  completed: boolean;
-  dueDate?: Date;
-}
+import { Task } from '../../interfaces/tasks.interface';
 
 @Component({
   selector: 'app-task-card',
