@@ -7,7 +7,11 @@
     Due: {{ task.dueDate | date : "mediumDate" }}
   </div>
   <div class="flex justify-end gap-2 pt-2">
-    <button class="retro-button text-sm" matTooltip="Complete Task">
+    <button
+      class="retro-button text-sm"
+      matTooltip="Complete Task"
+      (click)="completeTask()"
+    >
       <span class="material-icons">check_circle</span>
     </button>
     <button class="retro-button text-sm" matTooltip="Edit Task">
