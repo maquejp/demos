@@ -1,21 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --neon-pink: #ff00ff;
-  --neon-blue: #00ffff;
-  --neon-green: #39ff14;
-  --neon-yellow: #ffff00;
-  --dark-bg: #1a1a1a;
-  --font-display: "Press Start 2P", cursive;
-  --body-color: white;
-}
-
-html,
-body {
-  height: 100%;
-  margin: 0;
-  font-family: var(--font-display);
-  color: var(--body-color);
-  font-size: 12px;
 }

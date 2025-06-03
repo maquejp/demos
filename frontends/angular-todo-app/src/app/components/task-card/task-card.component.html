@@ -1,23 +1,17 @@
-<div class="m-4 p-4 retro-card flex flex-col gap-2 rounded-lg min-h-[200px]">
+<div class="m-4 p-4 flex flex-col gap-2 rounded-lg min-h-[200px] bg-amber-500">
   <div class="flex justify-between items-center">
-    <h3 class="text-lg font-semibold neon-text">{{ task.title }}</h3>
+    <h3 class="text-lg font-semibold">{{ task.title }}</h3>
   </div>
-  <p class="text-white">{{ task.description }}</p>
-  <div class="text-sm text-white/80">
-    Due: {{ task.dueDate | date : "mediumDate" }}
-  </div>
+  <p>{{ task.description }}</p>
+  <div class="text-sm">Due: {{ task.dueDate | date : "mediumDate" }}</div>
   <div class="flex justify-end gap-2 pt-2">
-    <button
-      class="retro-button text-sm"
-      matTooltip="Complete Task"
-      (click)="completeTask()"
-    >
+    <button class="text-sm" matTooltip="Complete Task" (click)="completeTask()">
       <span class="material-icons">check_circle</span>
     </button>
-    <button class="retro-button text-sm" matTooltip="Edit Task">
+    <button class="text-sm" matTooltip="Edit Task">
       <span class="material-icons">edit</span>
     </button>
-    <button class="retro-button text-sm" matTooltip="Delete Task">
+    <button class="text-sm" matTooltip="Delete Task">
       <span class="material-icons">delete</span>
     </button>
   </div>
