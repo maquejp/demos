@@ -4,10 +4,12 @@
   "type": "module",
   "version": "1.0.0",
   "workspaces": [
-    "react-express-setup/*"
+    "react-express-setup/*",
+    "react-resume/*"
   ],
   "scripts": {
-    "dev:react": "concurrently -n \"RE-API,RE-WEB\" -c \"blue,cyan\" \"npm run dev -w @react-express-setup/backend\" \"npm run dev -w @react-express-setup/frontend\"",
+    "dev:react-express-setup": "concurrently -n \"RE-API,RE-WEB\" -c \"blue,cyan\" \"npm run dev -w @react-express-setup/backend\" \"npm run dev -w @react-express-setup/frontend\"",
+    "dev:resume": "npm run dev -w @react-resume/app",
     "lint": "eslint \"**/*.{ts,tsx,js,mjs}\"",
     "format": "prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 1"
