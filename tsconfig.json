@@ -1,0 +1,11 @@
+{
+    "files": [],
+    "references": [
+        {
+            "path": "./react-resume/frontend"
+        },
+        {
+            "path": "./react-resume/backend"
+        }
+    ]
+}
