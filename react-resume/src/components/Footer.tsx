@@ -24,7 +24,6 @@ const Footer: React.FC<FooterProps> = ({ personalInfo }) => {
           <h3 className="text-2xl font-bold mb-2">{personalInfo.name}</h3>
           <p className="text-white/80">{personalInfo.title}</p>
         </div>
-
         <div className="flex justify-center gap-6 mb-6">
           <a
             href={`mailto:${personalInfo.email}`}
@@ -36,21 +35,21 @@ const Footer: React.FC<FooterProps> = ({ personalInfo }) => {
             </svg>
             <span>Contact</span>
           </a>
-
-          <a
-            href={`tel:${personalInfo.phone}`}
-            className="glass-effect px-4 py-2 rounded-full flex items-center gap-2 hover-lift"
-          >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-            </svg>
-            <span>Call</span>
-          </a>
+          {personalInfo.phone && (
+            <a
+              href={`tel:${personalInfo.phone}`}
+              className="glass-effect px-4 py-2 rounded-full flex items-center gap-2 hover-lift"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+              </svg>
+              <span>Call</span>
+            </a>
+          )}
         </div>
-
         <div className="pt-6 border-t border-white/20">
           <p className="text-white/60 text-sm">
-            © 2024 {personalInfo.name}. Senior Application Architect with 25+
+            © 2026 {personalInfo.name}. Senior Application Architect with 25+
             years of excellence.
           </p>
         </div>
