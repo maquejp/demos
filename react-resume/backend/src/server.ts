@@ -14,5 +14,5 @@ app.use(errorHandler);
 
 app.listen(3000, () => {
   logMessage('Server is running with global error handling', 'info');
-  logMessage('Listening on port 3000', 'info');
+  logMessage('Listening on port http://localhost:3000', 'info');
 });
