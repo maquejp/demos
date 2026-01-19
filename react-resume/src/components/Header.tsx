@@ -35,40 +35,46 @@ const Header: React.FC<HeaderProps> = ({
             {name}
           </h1>
 
-          <div className="mb-8">
-            <h2 className="text-2xl md:text-3xl text-white/90 font-medium mb-2">
-              {title}
-            </h2>
-            <div className="w-24 h-1 bg-linear-to-r from-accent-400 to-secondary-400 mx-auto rounded-full"></div>
-          </div>
+          {title && (
+            <div className="mb-8">
+              <h2 className="text-2xl md:text-3xl text-white/90 font-medium mb-2">
+                {title}
+              </h2>
+              <div className="w-24 h-1 bg-linear-to-r from-accent-400 to-secondary-400 mx-auto rounded-full"></div>
+            </div>
+          )}
 
           <div className="flex flex-wrap justify-center gap-6 text-white/80">
-            <div className="glass-effect px-4 py-2 rounded-full flex items-center gap-2 hover-lift cursor-default">
-              <svg
-                className="w-5 h-5 text-accent-300"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span className="font-medium">{location}</span>
-            </div>
+            {location && (
+              <div className="glass-effect px-4 py-2 rounded-full flex items-center gap-2 hover-lift cursor-default">
+                <svg
+                  className="w-5 h-5 text-accent-300"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span className="font-medium">{location}</span>
+              </div>
+            )}
 
-            <div className="glass-effect px-4 py-2 rounded-full flex items-center gap-2 hover-lift cursor-default">
-              <svg
-                className="w-5 h-5 text-accent-300"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-              </svg>
-              <span className="font-medium">{email}</span>
-            </div>
+            {email && (
+              <div className="glass-effect px-4 py-2 rounded-full flex items-center gap-2 hover-lift cursor-default">
+                <svg
+                  className="w-5 h-5 text-accent-300"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                </svg>
+                <span className="font-medium">{email}</span>
+              </div>
+            )}
 
             {phone && (
               <div className="glass-effect px-4 py-2 rounded-full flex items-center gap-2 hover-lift cursor-default">
