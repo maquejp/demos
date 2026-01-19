@@ -1,5 +1,5 @@
 {
-  "name": "@react-resume/backend",
+  "name": "@react-express-setup/backend",
   "version": "1.0.0",
   "type": "module",
   "main": "dist/server.js",

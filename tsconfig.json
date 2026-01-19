@@ -2,10 +2,10 @@
     "files": [],
     "references": [
         {
-            "path": "./react-resume/frontend"
+            "path": "./react-express-setup/frontend"
         },
         {
-            "path": "./react-resume/backend"
+            "path": "./react-express-setup/backend"
         }
     ]
 }
