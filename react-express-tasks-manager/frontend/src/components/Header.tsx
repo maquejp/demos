@@ -60,7 +60,7 @@ const Header: React.FC = () => {
                   strokeLinecap="round"
                 />
               </svg>
-              <h1 className="text-xl font-bold text-gray-900">Taks Manager</h1>
+              <h1 className="text-xl font-bold text-gray-900">Tasks Manager</h1>
             </div>
           </div>
           <div className="flex items-center gap-4">
