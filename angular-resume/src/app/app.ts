@@ -5,13 +5,7 @@ import { CertificationSection } from './certification-section/certification-sect
 import { EducationSection } from './education-section/education-section';
 import { ExperienceSection } from './experience-section/experience-section';
 import { SkillsSection } from './skills-section/skills-section';
-import {
-  Certification,
-  Education,
-  Experience,
-  PersonalInfo,
-  SkillCategory,
-} from './types';
+import { Certification, Education, Experience, PersonalInfo, SkillCategory } from './types';
 import {
   personalInfo as personalInfoData,
   experiences as experiencesData,
@@ -37,6 +31,6 @@ export class App {
   personalInfo: PersonalInfo = personalInfoData as PersonalInfo;
   experiences: Experience[] = experiencesData as Experience[];
   skillCategories: SkillCategory[] = skillCategoriesData as SkillCategory[];
-  education: Education[] = educationData as Education[];
+  educations: Education[] = educationData as Education[];
   certifications: Certification[] = certificationsData as Certification[];
 }
