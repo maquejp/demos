@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useUser } from '../contexts/UserContext';
 
 const LoginPage: React.FC = () => {
+  const { login } = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
@@ -23,7 +25,10 @@ const LoginPage: React.FC = () => {
 
       // For demo purposes, any email/password combination will work
       // In a real app, this would validate against a backend
-      const success = false;
+      const success = await login(
+        formData.email,
+        formData.password || 'password',
+      );
 
       if (!success) {
         setError('Invalid email or password');
