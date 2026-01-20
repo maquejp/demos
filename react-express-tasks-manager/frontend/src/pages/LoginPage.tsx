@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useUser } from '../contexts/UserContext';
+import { useUser } from '../hooks/useUser';
 
 const LoginPage: React.FC = () => {
   const { login } = useUser();

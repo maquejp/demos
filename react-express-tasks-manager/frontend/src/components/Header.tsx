@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useUser } from '../contexts/UserContext';
+import { useUser } from '../hooks/useUser';
 
 const Header: React.FC = () => {
   const { currentUser, logout } = useUser();

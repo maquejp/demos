@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import WelcomePage from './pages/WelcomePage';
 import LoginPage from './pages/LoginPage';
-import { useUser } from './contexts/UserContext';
+import { useUser } from './hooks/useUser';
 
 function App() {
   const { currentUser, loading } = useUser();
