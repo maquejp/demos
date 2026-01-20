@@ -1,5 +1,8 @@
+import { useUser } from '../contexts/UserContext';
+
 const WelcomePage: React.FC = () => {
-  return <div>WelcomePage</div>;
+  const { currentUser } = useUser();
+  return <div>Welcome, {currentUser?.name}</div>;
 };
 
 export default WelcomePage;
