@@ -9,4 +9,12 @@ import { Experience } from '../types';
 })
 export class ExperienceSection {
   @Input() experiences!: Experience[];
+
+  getCompanyInitials(company: string): string {
+    return company
+      .split(' ')
+      .map((word) => word[0])
+      .join('')
+      .substring(0, 2);
+  }
 }
