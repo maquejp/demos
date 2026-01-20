@@ -34,9 +34,12 @@ const LoginPage: React.FC = () => {
         setError('Invalid email or password');
       }
       // Navigation will be handled automatically by App.tsx when currentUser changes
-    } catch (err) {
-      console.log(err);
-      setError('Login failed. Please try again.');
+    } catch (error) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : 'Login failed. Please try again.',
+      );
     } finally {
       setIsLoading(false);
     }

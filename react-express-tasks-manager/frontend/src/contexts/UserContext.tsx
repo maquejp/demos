@@ -106,8 +106,10 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
       }
       return false;
     } catch (error) {
-      console.log(error);
-      dispatch({ type: 'SET_ERROR', payload: 'Login failed' });
+      dispatch({
+        type: 'SET_ERROR',
+        payload: error instanceof Error ? error.message : 'Login failed',
+      });
       return false;
     } finally {
       dispatch({ type: 'SET_LOADING', payload: false });
@@ -145,8 +147,10 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
       dispatch({ type: 'ADD_USER', payload: newUser });
       return true;
     } catch (error) {
-      console.log(error);
-      dispatch({ type: 'SET_ERROR', payload: 'Registration failed' });
+      dispatch({
+        type: 'SET_ERROR',
+        payload: error instanceof Error ? error.message : 'Registration failed',
+      });
       return false;
     } finally {
       dispatch({ type: 'SET_LOADING', payload: false });
