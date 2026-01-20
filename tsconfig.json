@@ -6,6 +6,12 @@
         },
         {
             "path": "./react-express-setup/backend"
+        },
+        {
+            "path": "./react-resume"
+        },
+        {
+            "path": "./angular-resume"
         }
     ]
 }
