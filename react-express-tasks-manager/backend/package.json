@@ -1,5 +1,5 @@
 {
-  "name": "@react-express-setup/backend",
+  "name": "@react-express-tasks-manager/backend",
   "version": "1.0.0",
   "type": "module",
   "main": "dist/server.js",

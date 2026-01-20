@@ -26,7 +26,11 @@
 				"GitHub.vscode-pull-request-github",
 				"formulahendry.auto-rename-tag",
 				"eamodio.gitlens",
-				"usernamehw.errorlens"
+				"usernamehw.errorlens",
+				"dsznajder.es7-react-js-snippets",
+				"mhutchie.git-graph",
+				"donjayamanne.githistory",
+				"vivaxy.vscode-conventional-commits"
 			]
 		}
 	}
