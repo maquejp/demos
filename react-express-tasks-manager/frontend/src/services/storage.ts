@@ -2,8 +2,8 @@ import type { User } from '../types/User';
 import usersData from '../data/users.json';
 
 const STORAGE_KEYS = {
-  USERS: 'advanced-todo-users',
-  CURRENT_USER: 'advanced-todo-current-user',
+  USERS: 'react-express-tasks-manager-users',
+  CURRENT_USER: 'react-express-tasks-manager-current-user',
 } as const;
 
 export class LocalStorageService {

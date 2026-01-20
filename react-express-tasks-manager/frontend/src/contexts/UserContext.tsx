@@ -81,7 +81,9 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
       }
 
       // Check if user should be remembered (optional)
-      const rememberMe = localStorage.getItem('advanced-todo-remember-me');
+      const rememberMe = localStorage.getItem(
+        'react-express-tasks-manager-remember-me',
+      );
       if (rememberMe === 'true') {
         const storedUser = LocalStorageService.getCurrentUser();
         if (storedUser) {

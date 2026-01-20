@@ -19,7 +19,7 @@ const LoginPage: React.FC = () => {
     try {
       // Save remember me preference
       localStorage.setItem(
-        'advanced-todo-remember-me',
+        'react-express-tasks-manager-remember-me',
         formData.rememberMe.toString(),
       );
 
