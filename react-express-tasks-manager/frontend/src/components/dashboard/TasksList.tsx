@@ -2,18 +2,19 @@ import React, { useEffect, useState } from 'react';
 
 import type { Task } from '../../types/Task';
 import TaskItem from './TaskItem';
-import { fetchTasks } from '../../services/tasksService';
+import { tasksApi } from '../../services/tasksService';
 
 interface TasksTableProps {
-  context: string;
+  status: string;
 }
 
-const TasksList: React.FC<TasksTableProps> = ({ context }: TasksTableProps) => {
+const TasksList: React.FC<TasksTableProps> = ({ status }: TasksTableProps) => {
   const [loading, setLoading] = useState(true);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [errors, setErrors] = useState<string[] | null>(null);
   useEffect(() => {
-    fetchTasks(context)
+    tasksApi
+      .fetchAll(status)
       .then((response) => {
         const taskArray = Array.isArray(response) ? response : response.data;
         const allTaskList: Task[] = (taskArray || []).map((task) => ({
@@ -31,7 +32,7 @@ const TasksList: React.FC<TasksTableProps> = ({ context }: TasksTableProps) => {
         setErrors([error.message]);
         setLoading(false);
       });
-  }, [context]);
+  }, [status]);
 
   if (loading) return <p>Loading tasks...</p>;
   if (!loading && errors) return <p>Error: {errors.join(', ')}</p>;

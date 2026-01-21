@@ -25,10 +25,10 @@ const TasksNavigation: React.FC = () => {
         </button>
       ))}
       <div className="mt-4">
-        {activeTab === 'in-progress' && <TasksList context="in-progress" />}
-        {activeTab === 'todo' && <TasksList context="todo" />}
-        {activeTab === 'completed' && <TasksList context="completed" />}
-        {activeTab === 'cancelled' && <TasksList context="cancelled" />}
+        {activeTab === 'in-progress' && <TasksList status="in-progress" />}
+        {activeTab === 'todo' && <TasksList status="todo" />}
+        {activeTab === 'completed' && <TasksList status="completed" />}
+        {activeTab === 'cancelled' && <TasksList status="cancelled" />}
       </div>
     </section>
   );
