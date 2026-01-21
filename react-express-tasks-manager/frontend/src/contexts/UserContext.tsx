@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
 import type { User } from '../types/User';
-import { LocalStorageService } from '../services/storage';
+import { LocalStorageService } from '../services/localStorageService';
 import {
   UserContext,
   type UserContextType,
