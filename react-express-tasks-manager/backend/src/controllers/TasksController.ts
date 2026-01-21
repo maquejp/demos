@@ -5,6 +5,8 @@ export class TasksController {
   private tasksService = new TasksService();
   getAll = async (req: Request, res: Response): Promise<void> => {
     try {
+      console.log(req);
+
       const response = await this.tasksService.getAll(req, res);
       res.status(response.status).json(response.data);
     } catch (error) {
