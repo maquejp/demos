@@ -1,13 +1,16 @@
 import type { Task } from '../../types/Task';
 
 interface TaskItemProps {
-  item: Task;
+  task: Task;
 }
 
-const TaskItem: React.FC<TaskItemProps> = ({ item }: TaskItemProps) => {
+const TaskItem: React.FC<TaskItemProps> = ({ task }: TaskItemProps) => {
   return (
-    <div>
-      <p>{item.id}</p>
+    <div className="m-2 p-4 border border-gray-300 rounded mb-2 w-1/2">
+      <p>{task.id}</p>
+      <p>{task.status}</p>
+      <p>{task.description}</p>
+      <p>{task.dueDate?.toLocaleDateString()}</p>
     </div>
   );
 };

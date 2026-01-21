@@ -387,12 +387,12 @@ const TasksList: React.FC<TasksTableProps> = ({ context }: TasksTableProps) => {
       <h1 className="text-xl font-bold text-gray-900">
         Displaying {context} tasks
       </h1>
-      <div
-        className={`task-card group transform transition-all duration-200 hover:scale-[1.02] hover:shadow-lg`}
-      >
-        <div className="flex items-start justify-between mb-3">
-          {contextData.map((items, i) => (
-            <TaskItem key={i} item={items} />
+      <div>
+        <div className="flex flex-wrap items-start">
+          {contextData.map((task, i) => (
+            <div className="flex-auto transform transition-all duration-200 hover:scale-[1.02] hover:shadow-lg">
+              <TaskItem key={i} task={task} />
+            </div>
           ))}
         </div>
       </div>

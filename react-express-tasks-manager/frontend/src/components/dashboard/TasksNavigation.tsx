@@ -7,6 +7,7 @@ const TasksNavigation: React.FC = () => {
     { id: 'in-progress', label: 'In Progress Tasks' },
     { id: 'todo', label: 'To-Do Tasks' },
     { id: 'completed', label: 'Completed Tasks' },
+    { id: 'cancelled', label: 'Cancelled Tasks' },
   ];
   return (
     <section className="py-4">
@@ -27,6 +28,7 @@ const TasksNavigation: React.FC = () => {
         {activeTab === 'in-progress' && <TasksList context="in-progress" />}
         {activeTab === 'todo' && <TasksList context="todo" />}
         {activeTab === 'completed' && <TasksList context="completed" />}
+        {activeTab === 'cancelled' && <TasksList context="cancelled" />}
       </div>
     </section>
   );
