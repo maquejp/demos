@@ -1,9 +1,10 @@
 import type { Request, Response } from 'express';
-import type { TasksResponse } from '@/models/Task';
+import type { Task, TasksResponse } from '@/models/Task';
 
 export class TasksService {
   async getAll(_req: Request, _res: Response): Promise<TasksResponse> {
     // Simulate fetching tasks from a database or data source
+    const status = _req.query.status as string | undefined;
     return {
       status: 200,
       data: [
@@ -382,7 +383,7 @@ export class TasksService {
           dueDate: '2025-02-21T00:00:00.000Z',
           tags: ['test'],
         },
-      ],
+      ].filter((task) => !status || task.status === status) as Task[],
     };
   }
 }

@@ -1,7 +1,7 @@
 import type { TasksResponse } from '../types/Task';
 
 export async function fetchTasks(context: string): Promise<TasksResponse> {
-  const response = await fetch(`/api/tasks?context=${context}`);
+  const response = await fetch(`/api/tasks?status=${context}`);
   if (!response.ok) {
     throw new Error(`Error fetching tasks: ${response.statusText}`);
   }
