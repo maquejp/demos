@@ -2,6 +2,8 @@
   {
     "id": "1",
     "name": "Alex Johnson",
+    "givenName": "Alex",
+    "familyName": "Johnson",
     "email": "alex@example.com",
     "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=alex",
     "role": "admin",
@@ -10,6 +12,8 @@
   {
     "id": "2",
     "name": "Sarah Chen",
+    "givenName": "Sarah",
+    "familyName": "Chen",
     "email": "sarah@example.com",
     "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=sarah",
     "role": "user",
@@ -18,6 +22,8 @@
   {
     "id": "3",
     "name": "Mike Williams",
+    "givenName": "Mike",
+    "familyName": "Williams",
     "email": "mike@example.com",
     "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=mike",
     "role": "user",
@@ -26,6 +32,8 @@
   {
     "id": "4",
     "name": "Emma Davis",
+    "givenName": "Emma",
+    "familyName": "Davis",
     "email": "emma@example.com",
     "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=emma",
     "role": "user",
