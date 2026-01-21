@@ -39,7 +39,7 @@ const TasksList: React.FC<TasksTableProps> = ({ context }: TasksTableProps) => {
   );
 
   if (loading) return <p>Loading tasks...</p>;
-  if (errors) return <p>Error: {errors.join(', ')}</p>;
+  if (!loading && errors) return <p>Error: {errors.join(', ')}</p>;
   return (
     <div>
       <div>
