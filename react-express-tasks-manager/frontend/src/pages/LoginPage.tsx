@@ -46,11 +46,11 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-linear-to-br from-primary-50 to-secondary-50 flex items-center justify-center p-4">
       <div className="max-w-md w-full space-y-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-linear-to-br from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center mx-auto mb-4">
             <svg
               className="w-8 h-8 text-white"
               fill="none"
@@ -69,6 +69,11 @@ const LoginPage: React.FC = () => {
             Tasks Manager
           </h1>
           <p className="text-gray-600">
+            Powerful task management dashboard to track projects, monitor
+            ongoing and completed tasks, and visualize your team's productivity
+            with intuitive charts.
+          </p>
+          <p className="text-gray-600 p-5">
             Sign in to manage your tasks and projects
           </p>
         </div>

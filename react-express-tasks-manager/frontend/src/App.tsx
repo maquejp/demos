@@ -4,7 +4,7 @@ import './App.css';
 
 import Footer from './components/Footer';
 import Header from './components/Header';
-import DashboardPage from './pages/DashboardPage';
+import WelcomePage from './pages/WelcomePage';
 import LoginPage from './pages/LoginPage';
 import { useUser } from './hooks/useUser';
 
@@ -50,7 +50,7 @@ function App() {
               <Header></Header>
               <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <Routes>
-                  <Route path="/" element={<DashboardPage />} />
+                  <Route path="/" element={<WelcomePage />} />
                 </Routes>
               </main>
               <Footer></Footer>
