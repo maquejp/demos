@@ -6,11 +6,11 @@ export interface Task {
   priority: 'low' | 'medium' | 'high';
   assignedTo: string[];
   createdBy: string;
-  createdAt: Date;
-  updatedAt: Date;
-  dueDate?: Date;
-  startDate?: Date;
-  endDate?: Date;
+  createdAt: string;
+  updatedAt: string;
+  dueDate?: string;
+  startDate?: string;
+  endDate?: string;
   tags: string[];
   projectId?: string;
 }

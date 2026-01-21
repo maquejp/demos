@@ -1,14 +1,31 @@
+import React, { useEffect, useState } from 'react';
+
 import type { Task } from '../../types/Task';
 import TaskItem from './TaskItem';
-import tasksData from '../../data/tasks.json';
+import { fetchTasks } from '../../services/tasksService';
 
 interface TasksTableProps {
   context: string;
 }
 
 const TasksList: React.FC<TasksTableProps> = ({ context }: TasksTableProps) => {
+  const [loading, setLoading] = useState(true);
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [errors, setErrors] = useState<string[] | null>(null);
+  useEffect(() => {
+    fetchTasks()
+      .then((tasks) => {
+        // Handle the fetched tasks here
+        setTasks(tasks.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setErrors([error.message]);
+        setLoading(false);
+      });
+  }, []);
   // Convert date strings from JSON to Date objects
-  const allTaskList: Task[] = tasksData.map((task) => ({
+  const allTaskList: Task[] = tasks.map((task) => ({
     ...task,
     createdAt: new Date(task.createdAt),
     updatedAt: new Date(task.updatedAt),
@@ -20,6 +37,9 @@ const TasksList: React.FC<TasksTableProps> = ({ context }: TasksTableProps) => {
   const contextData: Task[] = allTaskList.filter(
     (task) => task.status === context,
   );
+
+  if (loading) return <p>Loading tasks...</p>;
+  if (errors) return <p>Error: {errors.join(', ')}</p>;
   return (
     <div>
       <div>
