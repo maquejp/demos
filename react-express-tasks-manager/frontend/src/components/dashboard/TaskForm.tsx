@@ -156,7 +156,7 @@ const TaskForm: React.FC = () => {
                 <div className="flex gap-2">
                   <input
                     type="date"
-                    value={task?.startDate || ''}
+                    value={task?.startDate ? task.startDate.split('T')[0] : ''}
                     onChange={(e) =>
                       setTask((prev) =>
                         prev ? { ...prev, startDate: e.target.value } : prev,
@@ -168,7 +168,7 @@ const TaskForm: React.FC = () => {
                   <span className="flex items-center text-gray-500">to</span>
                   <input
                     type="date"
-                    value={task?.endDate || ''}
+                    value={task?.endDate ? task.endDate.split('T')[0] : ''}
                     onChange={(e) =>
                       setTask((prev) =>
                         prev ? { ...prev, endDate: e.target.value } : prev,
@@ -185,7 +185,7 @@ const TaskForm: React.FC = () => {
                 </label>
                 <input
                   type="date"
-                  value={task?.dueDate || ''}
+                  value={task?.dueDate ? task.dueDate.split('T')[0] : ''}
                   onChange={(e) =>
                     setTask((prev) =>
                       prev ? { ...prev, dueDate: e.target.value } : prev,
