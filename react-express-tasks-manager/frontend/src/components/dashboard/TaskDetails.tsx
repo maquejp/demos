@@ -99,13 +99,23 @@ const TaskDetails: React.FC = () => {
             </div>
           )}
         </div>
+
+        {/* Card Footer */}
+        <div className="p-3 bg-gray-50 border-t border-gray-200 text-right shrink-0 flex justify-center gap-4">
+          <button
+            className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+            onClick={() => navigate(-1)}
+          >
+            Save
+          </button>
+          <button
+            className="btn-secondary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+            onClick={() => navigate(-1)}
+          >
+            Cancel
+          </button>
+        </div>
       </div>
-      <button
-        className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-        onClick={() => navigate(-1)}
-      >
-        Go Back
-      </button>
     </div>
   );
 };
