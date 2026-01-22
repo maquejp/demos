@@ -128,7 +128,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
       <div className="p-3 bg-gray-50 border-t border-gray-200 text-right shrink-0">
         <div className="border-t border-gray-100 text-xs text-gray-400">
           Created {new Date(task.createdAt).toLocaleDateString()} by&nbsp;
-          {task.createdBy}
+          {task.createdBy.name}
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express';
 import type { User, UserResponse, UsersResponse } from '@/models/User';
 
-const users: User[] = [
+export const users: User[] = [
   {
     id: 1,
     name: 'Alex Johnson',
