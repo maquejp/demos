@@ -16,16 +16,7 @@ const TasksList: React.FC<TasksTableProps> = ({ status }: TasksTableProps) => {
     tasksApi
       .fetchAll(status)
       .then((response) => {
-        const taskArray = Array.isArray(response) ? response : response.data;
-        const allTaskList: Task[] = (taskArray || []).map((task) => ({
-          ...task,
-          createdAt: new Date(task.createdAt),
-          updatedAt: new Date(task.updatedAt),
-          startDate: task.startDate ? new Date(task.startDate) : undefined,
-          endDate: task.endDate ? new Date(task.endDate) : undefined,
-          dueDate: task.dueDate ? new Date(task.dueDate) : undefined,
-        })) as Task[];
-        setTasks(allTaskList);
+        setTasks(response.data as Task[]);
         setLoading(false);
       })
       .catch((error) => {
