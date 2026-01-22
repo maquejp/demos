@@ -31,7 +31,7 @@ export class TasksService {
           description:
             'Create wireframes, user flows, and high-fidelity mockups',
           status: 'in-progress',
-          priority: 'high',
+          priority: 'medium',
           assignedTo: ['2', '4'],
           createdBy: '1',
           createdAt: '2025-01-09T00:00:00.000Z',
@@ -40,7 +40,7 @@ export class TasksService {
           endDate: null,
           dueDate: '2025-01-24T00:00:00.000Z',
           tags: ['design', 'ui/ux', 'mockups'],
-          projectId: '1',
+          projectId: null,
         },
         {
           id: 3,
@@ -111,7 +111,7 @@ export class TasksService {
           title: 'User Authentication System',
           description: 'Implement login, registration, and password reset',
           status: 'in-progress',
-          priority: 'high',
+          priority: 'low',
           assignedTo: ['3'],
           createdBy: '1',
           createdAt: '2025-01-12T00:00:00.000Z',

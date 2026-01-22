@@ -45,7 +45,7 @@ const TasksList: React.FC<TasksTableProps> = ({ status }: TasksTableProps) => {
           )}
           {tasks.map((task, i) => (
             <div key={i}>
-              <TaskItem task={task} />
+              <TaskItem task={task} showStatus={false} />
             </div>
           ))}
         </div>
