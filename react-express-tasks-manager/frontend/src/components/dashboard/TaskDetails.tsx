@@ -110,7 +110,7 @@ const TaskDetails: React.FC = () => {
           </button>
           <button
             className="btn-secondary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate(`/`)}
           >
             Back
           </button>

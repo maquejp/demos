@@ -208,7 +208,7 @@ const TaskForm: React.FC = () => {
           </button>
           <button
             className="btn-secondary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-            onClick={() => navigate(`/`)}
+            onClick={() => navigate(`/tasks/${task?.id}`)}
           >
             Cancel
           </button>
