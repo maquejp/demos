@@ -6,7 +6,7 @@ export class TasksController {
   getAll = async (req: Request, res: Response): Promise<void> => {
     try {
       const response = await this.tasksService.getAll(req, res);
-      res.status(response.status).json(response.data);
+      res.status(response.status).json(response);
     } catch (error) {
       res.status(500).json({ message: 'Internal server error', error });
     }
@@ -15,7 +15,7 @@ export class TasksController {
   getOne = async (req: Request, res: Response): Promise<void> => {
     try {
       const response = await this.tasksService.getOne(req, res);
-      res.status(response.status).json(response.data);
+      res.status(response.status).json(response);
     } catch (error) {
       res.status(500).json({ message: 'Internal server error', error });
     }
