@@ -5,5 +5,6 @@ const router = Router();
 const tasksController = new TasksController();
 
 router.get('/', tasksController.getAll);
+router.get('/:id', tasksController.getOne);
 
 export default router;
