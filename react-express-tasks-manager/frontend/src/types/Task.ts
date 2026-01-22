@@ -4,16 +4,16 @@ export interface Task {
   description: string;
   status: 'todo' | 'in-progress' | 'completed' | 'cancelled';
   priority: 'low' | 'medium' | 'high';
-  assignedTo: string[];
-  dueDate?: string;
-  startDate?: string;
-  endDate?: string;
+  assignedTo: number[];
+  dueDate?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
   tags: string[];
-  projectId?: string;
-  createdBy: string;
+  projectId?: number | null;
+  createdBy: number;
   createdAt: string;
   updatedAt: string;
-  updatedBy: string;
+  updatedBy: number;
 }
 
 export interface TasksResponse {
