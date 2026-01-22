@@ -5,17 +5,23 @@ export interface Task {
   status: 'todo' | 'in-progress' | 'completed' | 'cancelled';
   priority: 'low' | 'medium' | 'high';
   assignedTo: string[];
+  dueDate?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
+  tags: string[];
+  projectId?: string | null;
   createdBy: string;
   createdAt: string;
   updatedAt: string;
-  dueDate?: string;
-  startDate?: string;
-  endDate?: string;
-  tags: string[];
-  projectId?: string;
+  updatedBy: string;
 }
 
 export interface TasksResponse {
   status: number;
   data: Task[];
+}
+
+export interface TaskResponse {
+  status: number;
+  data: Task | null;
 }
