@@ -35,7 +35,7 @@ const TaskDetails: React.FC = () => {
   return (
     <div>
       <div
-        className={`transform transition-all duration-200 hover:scale-[1.02] m-2 rounded overflow-hidden w-full h-80 flex flex-col ${getPriority(task.priority).borderClass} ${getPriority(task.priority).shadowClass}`}
+        className={`transform transition-all duration-200  m-2 rounded overflow-hidden w-full h-80 flex flex-col ${getPriority(task.priority).borderClass} `}
       >
         {/* Card Header */}
         <div
@@ -101,18 +101,18 @@ const TaskDetails: React.FC = () => {
         </div>
 
         {/* Card Footer */}
-        <div className="p-3 bg-gray-50 border-t border-gray-200 text-right shrink-0 flex justify-center gap-4">
+        <div className="p-3 bg-gray-50 border-t border-gray-200 text-right shrink-0 flex justify-between gap-4">
           <button
             className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate(`/tasks/${task.id}/edit`)}
           >
-            Save
+            Edit
           </button>
           <button
             className="btn-secondary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
             onClick={() => navigate(-1)}
           >
-            Cancel
+            Back
           </button>
         </div>
       </div>
