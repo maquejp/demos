@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useUser } from '../hooks/useUser';
+import { LocalStorageService } from '../services/localStorageService';
 
 const LoginPage: React.FC = () => {
   const { login } = useUser();
@@ -18,10 +19,7 @@ const LoginPage: React.FC = () => {
 
     try {
       // Save remember me preference
-      localStorage.setItem(
-        'react-express-tasks-manager-remember-me',
-        formData.rememberMe.toString(),
-      );
+      LocalStorageService.setRememberMe(formData.rememberMe);
 
       // For demo purposes, any email/password combination will work
       // In a real app, this would validate against a backend

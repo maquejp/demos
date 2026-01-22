@@ -58,4 +58,19 @@ export class UsersService {
       data: user,
     };
   }
+
+  async getOneByEmail(req: Request, _res: Response): Promise<UserResponse> {
+    if (!req.params.email) {
+      return {
+        status: 400,
+        data: null,
+      };
+    }
+    const email = req.params.email;
+    const user = users.find((u) => u.email === email) || null;
+    return {
+      status: 200,
+      data: user,
+    };
+  }
 }
