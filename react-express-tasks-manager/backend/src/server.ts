@@ -2,6 +2,7 @@ import express from 'express';
 import { errorHandler } from '@/middlewares/error.middleware';
 import { logMessage } from '@/utils/logger';
 import tasksRoutes from '@/routes/TasksRoutes';
+import usersRoutes from '@/routes/UsersRoutes';
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.get('/', (req, res) => {
   res.send('Hello, React Express Tasks Manager!');
 });
 app.use('/tasks', tasksRoutes);
+app.use('/users', usersRoutes);
 
 // The error handler MUST be the last middleware added
 app.use(errorHandler);

@@ -400,7 +400,6 @@ const tasks: Task[] = [
 
 export class TasksService {
   async getAll(req: Request, _res: Response): Promise<TasksResponse> {
-    // Simulate fetching tasks from a database or data source
     const status = req.query.status as string | undefined;
     return {
       status: 200,
