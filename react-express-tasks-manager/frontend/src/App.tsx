@@ -7,6 +7,7 @@ import Header from './components/Header';
 import WelcomePage from './pages/WelcomePage';
 import LoginPage from './pages/LoginPage';
 import { useUser } from './hooks/useUser';
+import TaskDetails from './components/dashboard/TaskDetails';
 
 function App() {
   const { currentUser, loading } = useUser();
@@ -51,6 +52,7 @@ function App() {
               <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <Routes>
                   <Route path="/" element={<WelcomePage />} />
+                  <Route path="/tasks/:id" element={<TaskDetails />} />
                 </Routes>
               </main>
               <Footer></Footer>

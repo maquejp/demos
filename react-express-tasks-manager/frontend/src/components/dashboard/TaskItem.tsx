@@ -1,4 +1,5 @@
 import type { Task } from '../../types/Task';
+import { useNavigate } from 'react-router-dom';
 
 interface TaskItemProps {
   task: Task;
@@ -53,10 +54,12 @@ const TaskItem: React.FC<TaskItemProps> = ({
   showStatus = true,
 }: TaskItemProps) => {
   const priority = getPriority(task.priority);
+  const navigate = useNavigate();
 
   return (
     <div
       className={`transform transition-all duration-200 hover:scale-[1.02] m-2 rounded overflow-hidden w-60 h-80 flex flex-col ${priority.borderClass} ${priority.shadowClass}`}
+      onClick={() => navigate(`/tasks/${task.id}`)}
     >
       {/* Card Header */}
       <div className={`${priority.headerClass} p-3 shrink-0`}>
