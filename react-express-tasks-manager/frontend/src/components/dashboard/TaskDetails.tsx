@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import type { Task } from '../../types/Task';
 import { tasksApi } from '../../services/tasksService';
 import { getPriority } from './taskUtils';
+import Loading from '../Loading';
 
 const TaskDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -27,7 +28,7 @@ const TaskDetails: React.FC = () => {
   if (!id) {
     return <p>Invalid task ID.</p>;
   }
-  if (loading) return <p>Loading tasks...</p>;
+  if (loading) return <Loading message="Loading task details..." />;
   if (!loading && errors) return <p>Error: {errors.join(', ')}</p>;
   if (!task) {
     return <p>Task not found.</p>;

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import type { Task } from '../../types/Task';
 import { tasksApi } from '../../services/tasksService';
+import Loading from '../Loading';
 
 const TaskForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -25,7 +26,7 @@ const TaskForm: React.FC = () => {
         });
     }
   }, [id]);
-  if (loading) return <p>Loading tasks...</p>;
+  if (loading) return <Loading message="Loading task..." />;
   if (!loading && errors) return <p>Error: {errors.join(', ')}</p>;
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -139,7 +140,9 @@ const TaskForm: React.FC = () => {
                       prev
                         ? {
                             ...prev,
-                            projectId: e.target.value as Task['projectId'],
+                            projectId: Number(
+                              e.target.value,
+                            ) as Task['projectId'],
                           }
                         : prev,
                     )

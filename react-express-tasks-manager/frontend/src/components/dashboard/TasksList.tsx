@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import type { Task } from '../../types/Task';
 import TaskItem from './TaskItem';
 import { tasksApi } from '../../services/tasksService';
+import Loading from '../Loading';
 
 interface TasksTableProps {
   status: string;
@@ -25,7 +26,7 @@ const TasksList: React.FC<TasksTableProps> = ({ status }: TasksTableProps) => {
       });
   }, [status]);
 
-  if (loading) return <p>Loading tasks...</p>;
+  if (loading) return <Loading message="Loading tasks..." />;
   if (!loading && errors) return <p>Error: {errors.join(', ')}</p>;
   return (
     <div>
