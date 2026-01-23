@@ -150,6 +150,18 @@ const TaskDetails: React.FC = () => {
               </Stack>
             </Box>
           )}
+
+          {/* Last Modified Info */}
+          {task.updatedBy && (
+            <Box sx={{ textAlign: 'right' }}>
+              <Divider />
+              <Typography variant="caption" color="text.secondary">
+                Last modified {new Date(task.updatedAt).toLocaleDateString()}{' '}
+                by&nbsp;
+                <strong>{task.updatedBy.name}</strong>
+              </Typography>
+            </Box>
+          )}
         </CardContent>
 
         {/* Card Footer */}
