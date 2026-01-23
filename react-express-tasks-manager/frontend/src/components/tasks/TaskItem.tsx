@@ -1,6 +1,6 @@
 import type { Task } from '../../types/Task';
 import { useNavigate } from 'react-router-dom';
-import { getPriority, getStatusColor } from './taskUtils';
+import { getPriorityColor, getStatusColorMap } from './taskUtils';
 import { useUser } from '../../hooks/useUser';
 import TaskHeader from './TaskHeader';
 import TagsList from './TagsList';
@@ -12,7 +12,6 @@ import {
   Chip,
   Stack,
   Divider,
-  useTheme,
 } from '@mui/material';
 import EventIcon from '@mui/icons-material/Event';
 
@@ -26,8 +25,6 @@ const TaskItem: React.FC<TaskItemProps> = ({
   showStatus = true,
 }: TaskItemProps) => {
   const { currentUser } = useUser();
-  const theme = useTheme();
-  const priority = getPriority(task.priority);
   const navigate = useNavigate();
 
   return (
@@ -47,7 +44,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
           transform: 'scale(1.02)',
           boxShadow: 3,
         },
-        borderLeft: `4px solid ${priority.color || theme.palette.primary.main}`,
+        borderLeft: `4px solid ${getPriorityColor(task.priority)}`,
       }}
     >
       {/* Card Header */}
@@ -98,7 +95,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
             <Chip
               label={task.status.replace('-', ' ')}
               size="small"
-              color={getStatusColor(task.status)}
+              color={getStatusColorMap()[task.status]}
               variant="outlined"
             />
           </Box>

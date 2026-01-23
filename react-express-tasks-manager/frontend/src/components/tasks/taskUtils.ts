@@ -1,37 +1,31 @@
 import type { Task } from '../../types/Task';
+import { theme } from '../../theme/theme';
 
-export const getPriority = (priority: Task['priority']) => {
-  const priorityConfig = {
-    high: {
-      color: '#ef4444',
-    },
-    medium: {
-      color: '#f59e0b',
-    },
-    low: {
-      color: '#10b981',
-    },
-  };
-
-  return (
-    priorityConfig[priority] || {
-      color: '#f59e0b',
-    }
-  );
+export const getPriorityColor = (priority: Task['priority']): string => {
+  switch (priority) {
+    case 'high':
+      return theme.palette.error.main;
+    case 'medium':
+      return theme.palette.warning.main;
+    case 'low':
+      return theme.palette.success.main;
+    default:
+      return theme.palette.grey[500];
+  }
 };
 
-export const getStatusColor = (status: Task['status']) => {
+export const getStatusColor = (status: Task['status']): string => {
   switch (status) {
     case 'todo':
-      return 'warning';
+      return theme.palette.warning.main;
     case 'in-progress':
-      return 'info';
+      return theme.palette.info.main;
     case 'completed':
-      return 'success';
+      return theme.palette.success.main;
     case 'cancelled':
-      return 'error';
+      return theme.palette.error.main;
     default:
-      return 'default';
+      return theme.palette.grey[500];
   }
 };
 
@@ -43,4 +37,13 @@ export const getStatusColorMap = (): Record<
   todo: 'warning',
   completed: 'success',
   cancelled: 'error',
+});
+
+export const getPriorityColorMap = (): Record<
+  string,
+  'default' | 'primary' | 'secondary' | 'error' | 'warning' | 'info' | 'success'
+> => ({
+  high: 'error',
+  medium: 'warning',
+  low: 'success',
 });

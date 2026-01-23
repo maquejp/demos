@@ -11,22 +11,25 @@ import {
   Stack,
   Alert,
   Divider,
-  useTheme,
 } from '@mui/material';
 import EventIcon from '@mui/icons-material/Event';
 import EditIcon from '@mui/icons-material/Edit';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import type { Task } from '../../types/Task';
 import { tasksApi } from '../../services/tasksService';
-import { getPriority, getStatusColor } from './taskUtils';
+import {
+  getPriorityColor,
+  getStatusColorMap,
+  getPriorityColorMap,
+} from './taskUtils';
 import Loading from '../Loading';
 import { useUser } from '../../hooks/useUser';
 import TaskHeader from './TaskHeader';
 import TagsList from './TagsList';
+import { capitalizeEachWord } from '../../utils/stringUtils';
 
 const TaskDetails: React.FC = () => {
   const { currentUser } = useUser();
-  const theme = useTheme();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -61,13 +64,11 @@ const TaskDetails: React.FC = () => {
     return <Alert severity="warning">Task not found.</Alert>;
   }
 
-  const priority = getPriority(task.priority);
-
   return (
     <Box sx={{ p: 2 }}>
       <Card
         sx={{
-          borderLeft: `4px solid ${priority.color || theme.palette.primary.main}`,
+          borderLeft: `4px solid ${getPriorityColor(task.priority)}`,
         }}
       >
         {/* Card Header */}
@@ -104,13 +105,20 @@ const TaskDetails: React.FC = () => {
             {task.description}
           </Typography>
 
-          <Box sx={{ mb: 2 }}>
+          <Stack direction="row" spacing={1} sx={{ mb: 2 }}>
             <Chip
-              label={task.status.replace('-', ' ')}
-              color={getStatusColor(task.status)}
-              variant="outlined"
+              label={capitalizeEachWord(task.status.replace('-', ' '))}
+              color={getStatusColorMap()[task.status]}
+              variant="filled"
+              sx={{ fontWeight: 600 }}
             />
-          </Box>
+            <Chip
+              label={capitalizeEachWord(task.priority.replace('-', ' '))}
+              color={getPriorityColorMap()[task.priority]}
+              variant="filled"
+              sx={{ fontWeight: 600 }}
+            />
+          </Stack>
 
           <Stack spacing={1.5} sx={{ mb: 2 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
