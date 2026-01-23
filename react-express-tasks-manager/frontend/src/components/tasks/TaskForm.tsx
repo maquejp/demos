@@ -79,7 +79,7 @@ const TaskForm: React.FC = () => {
   }, [userSearch, fetchUsers, task?.assignedTo]);
 
   useEffect(() => {
-    if (id) {
+    if (id && id !== 'add') {
       tasksApi
         .fetchOne(id)
         .then((response) => {
@@ -90,6 +90,8 @@ const TaskForm: React.FC = () => {
           setErrors([error.message]);
           setLoading(false);
         });
+    } else {
+      setLoading(false);
     }
   }, [id]);
 

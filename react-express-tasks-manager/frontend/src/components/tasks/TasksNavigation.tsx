@@ -1,8 +1,10 @@
 import { Box, Button, Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TasksList from './TasksList';
 
 const TasksNavigation: React.FC = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(0);
   const tabs = [
     { id: 'in-progress', label: 'In Progress Tasks' },
@@ -25,7 +27,12 @@ const TasksNavigation: React.FC = () => {
           mb: 2,
         }}
       >
-        <Button variant="contained" color="primary" sx={{ mt: 2 }}>
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ mt: 2 }}
+          onClick={() => navigate('/tasks/add')}
+        >
           New Task
         </Button>
       </Box>
