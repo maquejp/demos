@@ -28,6 +28,7 @@ import { tasksApi } from '../../services/tasksService';
 import { UsersService } from '../../services/usersService';
 import Loading from '../Loading';
 import TagsList from './TagsList';
+import type { User } from '../../types/User';
 
 const TaskForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -42,11 +43,21 @@ const TaskForm: React.FC = () => {
 
   // Debounced fetch for users
   const fetchUsers = useRef(
-    debounce(async (query: string) => {
+    debounce(async (query: string, excludedIds: number[]) => {
       setUserLoading(true);
       try {
-        const response = await UsersService.searchUsers(query);
-        setUserOptions(response);
+        const response = await UsersService.searchUsers(query, excludedIds);
+        // Convert User[] to TaskUser[] by mapping to only needed properties
+        const taskUsers: TaskUser[] = Array.isArray(response)
+          ? response.map((user: User) => ({
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              avatar: user.avatar,
+              role: user.role,
+            }))
+          : [];
+        setUserOptions(taskUsers);
       } catch {
         setUserOptions([]);
       } finally {
@@ -57,11 +68,13 @@ const TaskForm: React.FC = () => {
 
   useEffect(() => {
     if (userSearch.length > 0) {
-      fetchUsers(userSearch);
+      // Get IDs of already assigned users to exclude from results
+      const excludedIds = task?.assignedTo.map((user) => user.id) || [];
+      fetchUsers(userSearch, excludedIds);
     } else {
       setUserOptions([]);
     }
-  }, [userSearch, fetchUsers]);
+  }, [userSearch, fetchUsers, task?.assignedTo]);
 
   useEffect(() => {
     if (id) {

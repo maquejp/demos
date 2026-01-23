@@ -38,32 +38,41 @@ export const users: User[] = [
 
 export class UsersService {
   async getAll(req: Request, _res: Response): Promise<UsersResponse> {
+    let filteredUsers = users;
+
+    // Filter by search query if provided
     if (req?.query.q) {
-      const filteredUsers = users.filter((u) =>
+      filteredUsers = filteredUsers.filter((u) =>
         u.name
           .toLocaleLowerCase()
           .includes(String(req.query.q).toLocaleLowerCase()),
       );
-      if (filteredUsers.length === 0) {
-        return {
-          status: 404,
-          data: [],
-        };
-      }
-      return {
-        status: 200,
-        data: filteredUsers,
-      };
     }
-    if (users.length === 0) {
+
+    // Exclude users by IDs if provided
+    if (req?.query.ids) {
+      const excludedIds = String(req.query.ids)
+        .split(',')
+        .map((id) => Number(id.trim()))
+        .filter((id) => !isNaN(id));
+
+      if (excludedIds.length > 0) {
+        filteredUsers = filteredUsers.filter(
+          (u) => !excludedIds.includes(u.id),
+        );
+      }
+    }
+
+    if (filteredUsers.length === 0) {
       return {
         status: 404,
         data: [],
       };
     }
+
     return {
       status: 200,
-      data: users,
+      data: filteredUsers,
     };
   }
 
