@@ -20,4 +20,4 @@ Stack: Angular, TailwindCss, TypeScript, ESLint, Prettier, NodeJs
 
 ### Tasks manager version React
 
-Stack: Vite, ReactJs, TailwindCss, TypeScript, ESLint, Prettier, NodeJs, ExpressJs
+Stack: Vite, ReactJs, MUI, TypeScript, ESLint, Prettier, NodeJs, ExpressJs
