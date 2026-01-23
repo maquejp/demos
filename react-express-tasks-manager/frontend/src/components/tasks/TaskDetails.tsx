@@ -115,9 +115,9 @@ const TaskDetails: React.FC = () => {
               {task.tags.map((tag, index) => (
                 <span
                   key={index}
-                  className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded"
+                  className="px-2 py-1 bg-primary-100 text-primary-700 text-sm font-bold rounded-full bg-blue-100 flex items-center"
                 >
-                  #{tag}
+                  {tag}
                 </span>
               ))}
             </div>

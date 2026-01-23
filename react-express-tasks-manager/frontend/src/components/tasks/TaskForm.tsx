@@ -35,6 +35,31 @@ const TaskForm: React.FC = () => {
     console.log(task);
   };
 
+  const addTag = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const newTag = (e.target as HTMLInputElement).value.trim();
+      if (newTag && task) {
+        setTask({ ...task, tags: [...task.tags, newTag] });
+        (e.target as HTMLInputElement).value = '';
+      }
+    }
+  };
+
+  const removeTag = (index: number) => {
+    if (task) {
+      const newTags = task.tags.filter((_, i) => i !== index);
+      setTask({ ...task, tags: newTags });
+    }
+  };
+
+  const removeUser = (userId: number) => {
+    if (task) {
+      const newUsers = task.assignedTo.filter((user) => user.id !== userId);
+      setTask({ ...task, assignedTo: newUsers });
+    }
+  };
+
   return (
     <div>
       <div
@@ -70,8 +95,7 @@ const TaskForm: React.FC = () => {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Description *
               </label>
-              <input
-                type="text"
+              <textarea
                 value={task?.description || ''}
                 onChange={(e) =>
                   setTask((prev) =>
@@ -128,7 +152,7 @@ const TaskForm: React.FC = () => {
                 </select>
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Project
@@ -152,6 +176,8 @@ const TaskForm: React.FC = () => {
                   <option value="">Standalone Task</option>
                 </select>
               </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Duration
@@ -181,7 +207,9 @@ const TaskForm: React.FC = () => {
                     placeholder="End Date"
                   />
                 </div>
-              </div>{' '}
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Due Date
@@ -198,6 +226,80 @@ const TaskForm: React.FC = () => {
                 />
               </div>
             </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Tags
+              </label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  onKeyDown={(e) => addTag(e)}
+                  placeholder="Press Enter to add tag"
+                  className="input-field flex-1"
+                />
+              </div>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {task?.tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="px-2 py-1 bg-primary-100 text-primary-700 text-sm font-bold rounded-full bg-blue-100 flex items-center"
+                  >
+                    {tag}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        removeTag(index);
+                      }}
+                      className="ml-1 text-primary-500 hover:text-primary-700 cursor-pointer"
+                      data-index={index}
+                    >
+                      ×
+                    </button>
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Assigned users
+              </label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="Search and add user"
+                  className="input-field flex-1"
+                />
+              </div>
+              <div className="mt-2 flex gap-1">
+                {task?.assignedTo.map((user) => (
+                  <span
+                    key={user.id}
+                    className="px-2 py-1 bg-primary-100 text-primary-700 text-sm font-bold rounded-full bg-blue-100 flex items-center"
+                  >
+                    {user.name} ({user.email})
+                    <button
+                      type="button"
+                      onClick={() => {
+                        removeUser(user.id);
+                      }}
+                      className="ml-1 text-primary-700 cursor-pointer"
+                      data-index={user.id}
+                    >
+                      ×
+                    </button>
+                  </span>
+                ))}
+              </div>
+            </div>
+            {task && task.updatedBy && (
+              <div className="text-xs text-gray-400 w-full border-t border-gray-100 pt-2 flex justify-end">
+                <p>
+                  Last modified {new Date(task.updatedAt).toLocaleDateString()}
+                  &nbsp; by&nbsp;
+                  {task.updatedBy.name}
+                </p>
+              </div>
+            )}
           </form>
         </div>
 
