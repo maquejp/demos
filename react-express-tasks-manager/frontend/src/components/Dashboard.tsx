@@ -6,7 +6,7 @@ const Dashboard: React.FC = () => {
   return (
     <div>
       <h1 className="text-xl font-bold text-gray-900">
-        Welcome, {currentUser?.givenName}
+        Welcome, {currentUser?.name}
       </h1>
       <TasksNavigation />
     </div>
