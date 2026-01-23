@@ -1,4 +1,6 @@
 import { Box, Typography, Tooltip, useTheme } from '@mui/material';
+import StarRoundedIcon from '@mui/icons-material/StarRounded';
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import type { Task } from '../../types/Task';
 
 interface TaskHeaderProps {
@@ -46,9 +48,19 @@ const TaskHeader: React.FC<TaskHeaderProps> = ({
             ml: 1,
             fontSize: '1.125rem',
             flexShrink: 0,
+            color: 'inherit',
+            display: 'flex',
+            alignItems: 'center',
           }}
         >
-          {isYou ? '⭐' : '👤'}
+          {isYou ? (
+            <StarRoundedIcon
+              fontSize="inherit"
+              sx={{ color: theme.palette.app.gold }}
+            />
+          ) : (
+            <PersonRoundedIcon fontSize="inherit" />
+          )}
         </Typography>
       </Tooltip>
     </Box>

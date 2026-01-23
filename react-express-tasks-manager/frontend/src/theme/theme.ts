@@ -1,5 +1,18 @@
 import { createTheme } from '@mui/material/styles';
 
+type AppPalette = {
+  gold: string;
+};
+
+declare module '@mui/material/styles' {
+  interface Palette {
+    app: AppPalette;
+  }
+  interface PaletteOptions {
+    app?: Partial<AppPalette>;
+  }
+}
+
 export const theme = createTheme({
   palette: {
     primary: {
@@ -25,6 +38,9 @@ export const theme = createTheme({
     background: {
       default: '#f9fafb',
       paper: '#ffffff',
+    },
+    app: {
+      gold: '#fbbf24',
     },
   },
   typography: {

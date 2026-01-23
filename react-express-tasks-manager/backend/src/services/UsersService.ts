@@ -37,7 +37,30 @@ export const users: User[] = [
 ];
 
 export class UsersService {
-  async getAll(_req: Request, _res: Response): Promise<UsersResponse> {
+  async getAll(req: Request, _res: Response): Promise<UsersResponse> {
+    if (req?.query.q) {
+      const filteredUsers = users.filter((u) =>
+        u.name
+          .toLocaleLowerCase()
+          .includes(String(req.query.q).toLocaleLowerCase()),
+      );
+      if (filteredUsers.length === 0) {
+        return {
+          status: 404,
+          data: [],
+        };
+      }
+      return {
+        status: 200,
+        data: filteredUsers,
+      };
+    }
+    if (users.length === 0) {
+      return {
+        status: 404,
+        data: [],
+      };
+    }
     return {
       status: 200,
       data: users,
@@ -53,6 +76,12 @@ export class UsersService {
     }
     const id = Number(req.params.id);
     const user = users.find((u) => u.id === id) || null;
+    if (!user) {
+      return {
+        status: 404,
+        data: null,
+      };
+    }
     return {
       status: 200,
       data: user,
@@ -68,6 +97,12 @@ export class UsersService {
     }
     const email = req.params.email;
     const user = users.find((u) => u.email === email) || null;
+    if (!user) {
+      return {
+        status: 404,
+        data: null,
+      };
+    }
     return {
       status: 200,
       data: user,
