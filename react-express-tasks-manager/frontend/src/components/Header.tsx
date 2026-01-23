@@ -1,18 +1,18 @@
-import { Link as RouterLink } from 'react-router-dom';
+import ChecklistIcon from '@mui/icons-material/Checklist';
+import LogoutIcon from '@mui/icons-material/Logout';
 import {
   AppBar,
-  Toolbar,
-  Box,
-  Typography,
   Avatar,
+  Box,
   IconButton,
-  Stack,
   Link,
+  Stack,
+  Toolbar,
+  Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import LogoutIcon from '@mui/icons-material/Logout';
-import ChecklistIcon from '@mui/icons-material/Checklist';
+import { Link as RouterLink } from 'react-router-dom';
 import { useUser } from '../hooks/useUser';
 
 const Header: React.FC = () => {

@@ -1,32 +1,33 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import EditIcon from '@mui/icons-material/Edit';
+import EventIcon from '@mui/icons-material/Event';
 import {
-  Card,
-  CardContent,
-  CardActions,
+  Alert,
   Box,
   Button,
-  Typography,
+  Card,
+  CardActions,
+  CardContent,
   Chip,
-  Stack,
-  Alert,
   Divider,
+  Stack,
+  Typography,
 } from '@mui/material';
-import EventIcon from '@mui/icons-material/Event';
-import EditIcon from '@mui/icons-material/Edit';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import type { Task } from '../../types/Task';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useUser } from '../../hooks/useUser';
 import { tasksApi } from '../../services/tasksService';
+import type { Task } from '../../types/Task';
+import { formatDate } from '../../utils/dateUtils';
+import { capitalizeEachWord } from '../../utils/stringUtils';
+import Loading from '../Loading';
+import TagsList from './TagsList';
+import TaskHeader from './TaskHeader';
 import {
   getPriorityColor,
-  getStatusColorMap,
   getPriorityColorMap,
+  getStatusColorMap,
 } from './taskUtils';
-import Loading from '../Loading';
-import { useUser } from '../../hooks/useUser';
-import TaskHeader from './TaskHeader';
-import TagsList from './TagsList';
-import { capitalizeEachWord } from '../../utils/stringUtils';
 
 const TaskDetails: React.FC = () => {
   const { currentUser } = useUser();
@@ -124,20 +125,14 @@ const TaskDetails: React.FC = () => {
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <EventIcon sx={{ fontSize: 18, color: 'text.secondary' }} />
               <Typography variant="body2" color="text.secondary">
-                Due:{' '}
-                {task.dueDate
-                  ? new Date(task.dueDate).toLocaleDateString()
-                  : 'N/A'}
+                Due: {formatDate(task.dueDate)}
               </Typography>
             </Box>
 
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <EventIcon sx={{ fontSize: 18, color: 'text.secondary' }} />
               <Typography variant="body2" color="text.secondary">
-                Start:{' '}
-                {task.startDate
-                  ? new Date(task.startDate).toLocaleDateString()
-                  : 'N/A'}
+                Start: {formatDate(task.startDate)}
               </Typography>
             </Box>
           </Stack>
@@ -164,8 +159,7 @@ const TaskDetails: React.FC = () => {
             <Box sx={{ textAlign: 'right' }}>
               <Divider />
               <Typography variant="caption" color="text.secondary">
-                Last modified {new Date(task.updatedAt).toLocaleDateString()}{' '}
-                by&nbsp;
+                Last modified {formatDate(task.updatedAt)} by&nbsp;
                 <strong>{task.updatedBy.name}</strong>
               </Typography>
             </Box>

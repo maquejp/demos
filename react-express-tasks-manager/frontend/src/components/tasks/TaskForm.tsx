@@ -1,35 +1,35 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import CancelIcon from '@mui/icons-material/Cancel';
+import SaveIcon from '@mui/icons-material/Save';
 import {
-  Box,
-  Card,
-  CardHeader,
-  CardContent,
-  CardActions,
-  TextField,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Button,
-  Stack,
-  Typography,
-  Divider,
   Alert,
   Autocomplete,
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
   CircularProgress,
+  Divider,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Typography,
 } from '@mui/material';
-import { useRef } from 'react';
 import debounce from 'lodash.debounce';
-import SaveIcon from '@mui/icons-material/Save';
-import CancelIcon from '@mui/icons-material/Cancel';
-import type { Task, TaskUser } from '../../types/Task';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useUser } from '../../hooks/useUser';
 import { tasksApi } from '../../services/tasksService';
 import { UsersService } from '../../services/usersService';
-import { useUser } from '../../hooks/useUser';
+import type { Task, TaskUser } from '../../types/Task';
+import type { User } from '../../types/User';
+import { formatDate } from '../../utils/dateUtils';
 import Loading from '../Loading';
 import TagsList from './TagsList';
-import type { User } from '../../types/User';
 
 const TaskForm: React.FC = () => {
   const { currentUser } = useUser();
@@ -382,8 +382,7 @@ const TaskForm: React.FC = () => {
                     color="text.secondary"
                     sx={{ textAlign: 'right' }}
                   >
-                    Last modified{' '}
-                    {new Date(task.updatedAt).toLocaleDateString()} by&nbsp;
+                    Last modified {formatDate(task.updatedAt)} by&nbsp;
                     <strong>{task.updatedBy.name}</strong>
                   </Typography>
                 </>

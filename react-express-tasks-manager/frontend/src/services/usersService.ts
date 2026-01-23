@@ -1,4 +1,4 @@
-import type { UserResponse, User } from '../types/User';
+import type { User, UserResponse } from '../types/User';
 
 const API_BASE_URL = '/api';
 

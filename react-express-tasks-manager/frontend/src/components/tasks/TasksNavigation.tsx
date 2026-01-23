@@ -1,5 +1,5 @@
+import { Box, Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
-import { Box, Tabs, Tab } from '@mui/material';
 import TasksList from './TasksList';
 
 const TasksNavigation: React.FC = () => {

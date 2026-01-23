@@ -1,22 +1,22 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import ChecklistIcon from '@mui/icons-material/Checklist';
 import {
-  Box,
-  Container,
-  Card,
-  TextField,
-  Button,
-  FormControlLabel,
-  Checkbox,
   Alert,
-  Typography,
-  Divider,
-  Stack,
-  CircularProgress,
   Avatar,
+  Box,
+  Button,
+  Card,
+  Checkbox,
+  CircularProgress,
+  Container,
+  Divider,
+  FormControlLabel,
+  Stack,
+  TextField,
+  Typography,
   useTheme,
 } from '@mui/material';
-import ChecklistIcon from '@mui/icons-material/Checklist';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useUser } from '../hooks/useUser';
 import { LocalStorageService } from '../services/localStorageService';
 

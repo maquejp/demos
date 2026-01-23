@@ -1,10 +1,10 @@
+import { Alert, Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { Alert, Typography, Grid } from '@mui/material';
 
-import type { Task } from '../../types/Task';
-import TaskItem from './TaskItem';
 import { tasksApi } from '../../services/tasksService';
+import type { Task } from '../../types/Task';
 import Loading from '../Loading';
+import TaskItem from './TaskItem';
 
 interface TasksTableProps {
   status: string;

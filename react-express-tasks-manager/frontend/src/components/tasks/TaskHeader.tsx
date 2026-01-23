@@ -1,6 +1,6 @@
-import { Box, Typography, Tooltip, useTheme } from '@mui/material';
-import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
+import StarRoundedIcon from '@mui/icons-material/StarRounded';
+import { Box, Tooltip, Typography, useTheme } from '@mui/material';
 import type { Task } from '../../types/Task';
 
 interface TaskHeaderProps {

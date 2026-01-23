@@ -1,19 +1,20 @@
-import type { Task } from '../../types/Task';
-import { useNavigate } from 'react-router-dom';
-import { getPriorityColor, getStatusColorMap } from './taskUtils';
-import { useUser } from '../../hooks/useUser';
-import TaskHeader from './TaskHeader';
-import TagsList from './TagsList';
+import EventIcon from '@mui/icons-material/Event';
 import {
+  Box,
   Card,
   CardContent,
-  Box,
-  Typography,
   Chip,
-  Stack,
   Divider,
+  Stack,
+  Typography,
 } from '@mui/material';
-import EventIcon from '@mui/icons-material/Event';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../hooks/useUser';
+import type { Task } from '../../types/Task';
+import { formatDate } from '../../utils/dateUtils';
+import TagsList from './TagsList';
+import TaskHeader from './TaskHeader';
+import { getPriorityColor, getStatusColorMap } from './taskUtils';
 
 interface TaskItemProps {
   task: Task;
@@ -108,7 +109,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
                 sx={{ width: 16, height: 16, color: 'text.secondary' }}
               />
               <Typography variant="caption" color="text.secondary">
-                Due: {new Date(task.dueDate).toLocaleDateString()}
+                Due: {formatDate(task.dueDate)}
               </Typography>
             </Box>
           )}
@@ -119,7 +120,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
                 sx={{ width: 16, height: 16, color: 'text.secondary' }}
               />
               <Typography variant="caption" color="text.secondary">
-                End: {new Date(task.endDate).toLocaleDateString()}
+                End: {formatDate(task.endDate)}
               </Typography>
             </Box>
           )}
@@ -130,7 +131,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
                 sx={{ width: 16, height: 16, color: 'text.secondary' }}
               />
               <Typography variant="caption" color="text.secondary">
-                Start: {new Date(task.startDate).toLocaleDateString()}
+                Start: {formatDate(task.startDate)}
               </Typography>
             </Box>
           )}
@@ -154,7 +155,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
         }}
       >
         <Typography variant="caption" color="text.secondary">
-          Last modified {new Date(task.updatedAt).toLocaleDateString()}
+          Last modified {formatDate(task.updatedAt)}
           <br /> by&nbsp;{task.updatedBy.name}
         </Typography>
       </Box>
