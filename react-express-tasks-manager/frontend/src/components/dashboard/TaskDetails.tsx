@@ -4,8 +4,10 @@ import type { Task } from '../../types/Task';
 import { tasksApi } from '../../services/tasksService';
 import { getPriority } from './taskUtils';
 import Loading from '../Loading';
+import { useUser } from '../../hooks/useUser';
 
 const TaskDetails: React.FC = () => {
+  const { currentUser } = useUser();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -40,9 +42,21 @@ const TaskDetails: React.FC = () => {
       >
         {/* Card Header */}
         <div
-          className={`${getPriority(task.priority).headerClass} p-3 shrink-0`}
+          className={`${getPriority(task.priority).headerClass} p-3 flex flex-row justify-between items-center`}
         >
-          <h3 className="text-sm font-semibold text-white">{task.title}</h3>
+          <h3 className="text-sm font-semibold text-white" title={task.title}>
+            {task.title}
+          </h3>
+          <p
+            className="text-xs text-white cursor-pointer"
+            title={
+              currentUser?.id === task.updatedBy.id
+                ? 'You'
+                : task.updatedBy.name
+            }
+          >
+            {currentUser?.id === task.updatedBy.id ? '⭐' : '👤'}
+          </p>
         </div>
 
         {/* Card Body */}
@@ -68,43 +82,43 @@ const TaskDetails: React.FC = () => {
             <span>{task.status.replace('-', ' ')}</span>
           </div>
 
-          {task.dueDate && (
-            <div className="flex items-center gap-1 text-sm text-gray-500 mb-3">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              Due: {new Date(task.dueDate).toLocaleDateString()}
-            </div>
-          )}
+          <div className="flex items-center gap-1 text-sm text-gray-500 mb-3">
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+            Due:{' '}
+            {task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'N/A'}
+          </div>
 
-          {task.startDate && (
-            <div className="flex items-center gap-1 text-sm text-gray-500 mb-3">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              Start: {new Date(task.startDate).toLocaleDateString()}
-            </div>
-          )}
+          <div className="flex items-center gap-1 text-sm text-gray-500 mb-3">
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+            Start:{' '}
+            {task.startDate
+              ? new Date(task.startDate).toLocaleDateString()
+              : 'N/A'}
+          </div>
 
           {task.tags.length > 0 && (
             <div className="flex flex-wrap gap-1 mb-3">
@@ -119,11 +133,12 @@ const TaskDetails: React.FC = () => {
             </div>
           )}
 
-          {task.createdBy && (
+          {task.updatedBy && (
             <div className="text-xs text-gray-400 w-full border-t border-gray-100 pt-2 flex justify-end">
               <p>
-                Created {new Date(task.createdAt).toLocaleDateString()} by&nbsp;
-                {task.createdBy.name}
+                Last modified {new Date(task.updatedAt).toLocaleDateString()}{' '}
+                by&nbsp;
+                {task.updatedBy.name}
               </p>
             </div>
           )}

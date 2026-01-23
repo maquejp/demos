@@ -1,6 +1,7 @@
 import type { Task } from '../../types/Task';
 import { useNavigate } from 'react-router-dom';
 import { getPriority, getStatusColor } from './taskUtils';
+import { useUser } from '../../hooks/useUser';
 
 interface TaskItemProps {
   task: Task;
@@ -11,17 +12,30 @@ const TaskItem: React.FC<TaskItemProps> = ({
   task,
   showStatus = true,
 }: TaskItemProps) => {
+  const { currentUser } = useUser();
   const priority = getPriority(task.priority);
   const navigate = useNavigate();
 
   return (
     <div
-      className={`cursor-pointer transform transition-all duration-200 hover:scale-[1.02] m-2 rounded overflow-hidden w-60 h-90 flex flex-col ${priority.borderClass} ${priority.shadowClass}`}
+      className={`cursor-pointer transform transition-all duration-200 hover:scale-[1.02] m-2 rounded overflow-hidden w-70 h-100 flex flex-col ${priority.borderClass} ${priority.shadowClass}`}
       onClick={() => navigate(`/tasks/${task.id}`)}
     >
       {/* Card Header */}
-      <div className={`${priority.headerClass} p-3 shrink-0`}>
-        <h3 className="text-sm font-semibold text-white">{task.title}</h3>
+      <div
+        className={`${priority.headerClass} p-3 flex flex-row justify-between items-center`}
+      >
+        <h3 className="text-sm font-semibold text-white" title={task.title}>
+          {task.title}
+        </h3>
+        <p
+          className="text-xs text-white"
+          title={
+            currentUser?.id === task.updatedBy.id ? 'You' : task.updatedBy.name
+          }
+        >
+          {currentUser?.id === task.updatedBy.id ? '⭐' : '👤'}
+        </p>
       </div>
 
       {/* Card Body */}
@@ -127,8 +141,8 @@ const TaskItem: React.FC<TaskItemProps> = ({
       {/* Card Footer */}
       <div className="p-3 bg-gray-50 border-t border-gray-200 text-right shrink-0">
         <div className="border-t border-gray-100 text-xs text-gray-400">
-          Created {new Date(task.createdAt).toLocaleDateString()} by&nbsp;
-          {task.createdBy.name}
+          Last modified {new Date(task.updatedAt).toLocaleDateString()}
+          <br /> by&nbsp;{task.updatedBy.name}
         </div>
       </div>
     </div>
