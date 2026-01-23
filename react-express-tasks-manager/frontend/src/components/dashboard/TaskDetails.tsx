@@ -5,6 +5,7 @@ import { tasksApi } from '../../services/tasksService';
 import { getPriority } from './taskUtils';
 import Loading from '../Loading';
 import { useUser } from '../../hooks/useUser';
+import TaskHeader from './TaskHeader';
 
 const TaskDetails: React.FC = () => {
   const { currentUser } = useUser();
@@ -35,29 +36,18 @@ const TaskDetails: React.FC = () => {
   if (!task) {
     return <p>Task not found.</p>;
   }
+  const priority = getPriority(task.priority);
   return (
     <div>
       <div
-        className={`transform transition-all duration-200  m-2 rounded overflow-hidden w-full flex flex-col ${getPriority(task.priority).borderClass} `}
+        className={`transform transition-all duration-200  m-2 rounded overflow-hidden w-full flex flex-col ${priority.borderClass} `}
       >
         {/* Card Header */}
-        <div
-          className={`${getPriority(task.priority).headerClass} p-3 flex flex-row justify-between items-center`}
-        >
-          <h3 className="text-sm font-semibold text-white" title={task.title}>
-            {task.title}
-          </h3>
-          <p
-            className="text-xs text-white cursor-pointer"
-            title={
-              currentUser?.id === task.updatedBy.id
-                ? 'You'
-                : task.updatedBy.name
-            }
-          >
-            {currentUser?.id === task.updatedBy.id ? '⭐' : '👤'}
-          </p>
-        </div>
+        <TaskHeader
+          task={task}
+          headerClass={priority.headerClass}
+          currentUserId={currentUser?.id}
+        />
 
         {/* Card Body */}
         <div className="p-4 bg-white flex-1 overflow-y-auto">

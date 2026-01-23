@@ -2,6 +2,7 @@ import type { Task } from '../../types/Task';
 import { useNavigate } from 'react-router-dom';
 import { getPriority, getStatusColor } from './taskUtils';
 import { useUser } from '../../hooks/useUser';
+import TaskHeader from './TaskHeader';
 
 interface TaskItemProps {
   task: Task;
@@ -22,21 +23,11 @@ const TaskItem: React.FC<TaskItemProps> = ({
       onClick={() => navigate(`/tasks/${task.id}`)}
     >
       {/* Card Header */}
-      <div
-        className={`${priority.headerClass} p-3 flex flex-row justify-between items-center`}
-      >
-        <h3 className="text-sm font-semibold text-white" title={task.title}>
-          {task.title}
-        </h3>
-        <p
-          className="text-xs text-white"
-          title={
-            currentUser?.id === task.updatedBy.id ? 'You' : task.updatedBy.name
-          }
-        >
-          {currentUser?.id === task.updatedBy.id ? '⭐' : '👤'}
-        </p>
-      </div>
+      <TaskHeader
+        task={task}
+        headerClass={priority.headerClass}
+        currentUserId={currentUser?.id}
+      />
 
       {/* Card Body */}
       <div className="p-4 bg-white flex-1 overflow-y-auto">
