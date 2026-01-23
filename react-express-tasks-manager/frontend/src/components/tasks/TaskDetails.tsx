@@ -11,6 +11,7 @@ import {
   Stack,
   Alert,
   Divider,
+  useTheme,
 } from '@mui/material';
 import EventIcon from '@mui/icons-material/Event';
 import EditIcon from '@mui/icons-material/Edit';
@@ -25,6 +26,7 @@ import TagsList from './TagsList';
 
 const TaskDetails: React.FC = () => {
   const { currentUser } = useUser();
+  const theme = useTheme();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -65,15 +67,11 @@ const TaskDetails: React.FC = () => {
     <Box sx={{ p: 2 }}>
       <Card
         sx={{
-          borderLeft: `4px solid ${priority.color || '#3b82f6'}`,
+          borderLeft: `4px solid ${priority.color || theme.palette.primary.main}`,
         }}
       >
         {/* Card Header */}
-        <TaskHeader
-          task={task}
-          headerClass={priority.headerClass}
-          currentUserId={currentUser?.id}
-        />
+        <TaskHeader task={task} currentUserId={currentUser?.id} />
 
         {/* Card Body */}
         <CardContent>

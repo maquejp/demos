@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { Box, Container } from '@mui/material';
+import { Box, Container, useTheme } from '@mui/material';
 
 import './App.css';
 
@@ -13,6 +13,7 @@ import TaskForm from './components/tasks/TaskForm';
 import Loading from './components/Loading';
 
 function App() {
+  const theme = useTheme();
   const { currentUser, loading } = useUser();
 
   // Show loading while checking authentication
@@ -29,7 +30,12 @@ function App() {
           currentUser ? (
             <Navigate to="/" replace />
           ) : (
-            <Box sx={{ minHeight: '100vh', backgroundColor: '#f9fafb' }}>
+            <Box
+              sx={{
+                minHeight: '100vh',
+                backgroundColor: theme.palette.background.default,
+              }}
+            >
               <LoginPage />
               <Footer></Footer>
             </Box>
@@ -42,7 +48,12 @@ function App() {
         path="/*"
         element={
           currentUser ? (
-            <Box sx={{ minHeight: '100vh', backgroundColor: '#f9fafb' }}>
+            <Box
+              sx={{
+                minHeight: '100vh',
+                backgroundColor: theme.palette.background.default,
+              }}
+            >
               <Header></Header>
               <Container maxWidth="lg" sx={{ py: 4 }}>
                 <Routes>

@@ -24,11 +24,11 @@ const Header: React.FC = () => {
     <AppBar
       position="static"
       sx={{
-        backgroundColor: 'white',
-        color: 'text.primary',
+        backgroundColor: theme.palette.background.paper,
+        color: theme.palette.text.primary,
         boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
         borderBottom: '1px solid',
-        borderBottomColor: 'divider',
+        borderBottomColor: theme.palette.divider,
       }}
     >
       <Toolbar>
@@ -40,7 +40,7 @@ const Header: React.FC = () => {
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            style={{ color: '#2563eb' }}
+            style={{ color: theme.palette.primary.main }}
           >
             <rect
               x="4"

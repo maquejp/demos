@@ -14,11 +14,13 @@ import {
   Stack,
   CircularProgress,
   Avatar,
+  useTheme,
 } from '@mui/material';
 import { useUser } from '../hooks/useUser';
 import { LocalStorageService } from '../services/localStorageService';
 
 const LoginPage: React.FC = () => {
+  const theme = useTheme();
   const { login } = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -62,7 +64,7 @@ const LoginPage: React.FC = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%)',
+        background: `linear-gradient(135deg, ${theme.palette.background.default} 0%, ${theme.palette.background.default} 100%)`,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -79,7 +81,7 @@ const LoginPage: React.FC = () => {
                 height: 64,
                 mx: 'auto',
                 mb: 2,
-                background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+                background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
               }}
             >
               <svg

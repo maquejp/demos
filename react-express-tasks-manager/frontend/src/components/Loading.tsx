@@ -1,14 +1,15 @@
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, CircularProgress, Typography, useTheme } from '@mui/material';
 
 interface LoadingProps {
   message?: string;
 }
 
 const Loading: React.FC<LoadingProps> = ({ message }) => {
+  const theme = useTheme();
   return (
     <Box
       sx={{
-        backgroundColor: '#f9fafb',
+        backgroundColor: theme.palette.background.default,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

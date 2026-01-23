@@ -12,6 +12,7 @@ import {
   Chip,
   Stack,
   Divider,
+  useTheme,
 } from '@mui/material';
 import EventIcon from '@mui/icons-material/Event';
 
@@ -25,6 +26,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
   showStatus = true,
 }: TaskItemProps) => {
   const { currentUser } = useUser();
+  const theme = useTheme();
   const priority = getPriority(task.priority);
   const navigate = useNavigate();
 
@@ -45,15 +47,11 @@ const TaskItem: React.FC<TaskItemProps> = ({
           transform: 'scale(1.02)',
           boxShadow: 3,
         },
-        borderLeft: `4px solid ${priority.color || '#3b82f6'}`,
+        borderLeft: `4px solid ${priority.color || theme.palette.primary.main}`,
       }}
     >
       {/* Card Header */}
-      <TaskHeader
-        task={task}
-        headerClass={priority.headerClass}
-        currentUserId={currentUser?.id}
-      />
+      <TaskHeader task={task} currentUserId={currentUser?.id} />
 
       {/* Card Body */}
       <CardContent sx={{ flex: 1, overflowY: 'auto', pb: 1 }}>

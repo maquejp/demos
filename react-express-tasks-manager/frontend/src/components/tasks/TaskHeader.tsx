@@ -1,17 +1,16 @@
-import { Box, Typography, Tooltip } from '@mui/material';
+import { Box, Typography, Tooltip, useTheme } from '@mui/material';
 import type { Task } from '../../types/Task';
 
 interface TaskHeaderProps {
   task: Task;
-  headerClass: string;
   currentUserId?: number;
 }
 
 const TaskHeader: React.FC<TaskHeaderProps> = ({
   task,
-  headerClass,
   currentUserId,
 }: TaskHeaderProps) => {
+  const theme = useTheme();
   const isYou = currentUserId === task.updatedBy.id;
 
   return (
@@ -22,7 +21,7 @@ const TaskHeader: React.FC<TaskHeaderProps> = ({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+        background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
         color: 'white',
       }}
     >
