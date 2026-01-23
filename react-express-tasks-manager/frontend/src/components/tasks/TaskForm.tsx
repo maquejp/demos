@@ -12,16 +12,20 @@ import {
   FormControl,
   InputLabel,
   Button,
-  Chip,
   Stack,
   Typography,
   Divider,
   Alert,
+  Autocomplete,
+  CircularProgress,
 } from '@mui/material';
+import { useRef } from 'react';
+import debounce from 'lodash.debounce';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
-import type { Task } from '../../types/Task';
+import type { Task, TaskUser } from '../../types/Task';
 import { tasksApi } from '../../services/tasksService';
+import { UsersService } from '../../services/usersService';
 import Loading from '../Loading';
 import TagsList from './TagsList';
 
@@ -32,6 +36,32 @@ const TaskForm: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState<string[] | null>(null);
   const [task, setTask] = useState<Task | null>(null);
+  const [userOptions, setUserOptions] = useState<TaskUser[]>([]);
+  const [userSearch, setUserSearch] = useState('');
+  const [userLoading, setUserLoading] = useState(false);
+
+  // Debounced fetch for users
+  const fetchUsers = useRef(
+    debounce(async (query: string) => {
+      setUserLoading(true);
+      try {
+        const response = await UsersService.searchUsers(query);
+        setUserOptions(response);
+      } catch {
+        setUserOptions([]);
+      } finally {
+        setUserLoading(false);
+      }
+    }, 400),
+  ).current;
+
+  useEffect(() => {
+    if (userSearch.length > 0) {
+      fetchUsers(userSearch);
+    } else {
+      setUserOptions([]);
+    }
+  }, [userSearch, fetchUsers]);
 
   useEffect(() => {
     if (id) {
@@ -74,13 +104,6 @@ const TaskForm: React.FC = () => {
     if (task) {
       const newTags = task.tags.filter((_, i) => i !== index);
       setTask({ ...task, tags: newTags });
-    }
-  };
-
-  const removeUser = (userId: number) => {
-    if (task) {
-      const newUsers = task.assignedTo.filter((user) => user.id !== userId);
-      setTask({ ...task, assignedTo: newUsers });
     }
   };
 
@@ -272,31 +295,45 @@ const TaskForm: React.FC = () => {
                 <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600 }}>
                   Assigned Users
                 </Typography>
-                <TextField
-                  fullWidth
-                  placeholder="Search and add user"
-                  size="small"
-                  sx={{ mb: 1 }}
-                />
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  sx={{ flexWrap: 'wrap', gap: 1 }}
-                >
-                  {task?.assignedTo.map((user) => (
-                    <Chip
-                      key={user.id}
-                      label={`${user.name} (${user.email})`}
-                      onDelete={() => removeUser(user.id)}
-                      color="primary"
-                      variant="filled"
-                      sx={{
-                        backgroundColor: 'primary.light',
-                        color: 'primary.dark',
+                <Autocomplete
+                  multiple
+                  filterSelectedOptions
+                  options={userOptions}
+                  getOptionLabel={(option: TaskUser) =>
+                    `${option.name} (${option.email})`
+                  }
+                  value={task?.assignedTo || []}
+                  onChange={(_e, newValue) => {
+                    setTask((prev) =>
+                      prev ? { ...prev, assignedTo: newValue } : prev,
+                    );
+                  }}
+                  onInputChange={(_e, value) => setUserSearch(value)}
+                  loading={userLoading}
+                  isOptionEqualToValue={(option, value) =>
+                    option.id === value.id
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      fullWidth
+                      placeholder="Search and add user"
+                      size="small"
+                      sx={{ mb: 1 }}
+                      InputProps={{
+                        ...params.InputProps,
+                        endAdornment: (
+                          <>
+                            {userLoading ? (
+                              <CircularProgress color="inherit" size={20} />
+                            ) : null}
+                            {params.InputProps.endAdornment}
+                          </>
+                        ),
                       }}
                     />
-                  ))}
-                </Stack>
+                  )}
+                />
               </Box>
 
               {/* Last Modified Info */}
