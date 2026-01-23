@@ -40,7 +40,21 @@ const Header: React.FC = () => {
     >
       <Toolbar>
         {/* Logo Section */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flex: 1 }}>
+        <Link
+          component={RouterLink}
+          to="/"
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1.5,
+            flex: 1,
+            textDecoration: 'none',
+            color: 'inherit',
+            '&:hover': {
+              opacity: 0.8,
+            },
+          }}
+        >
           <ChecklistIcon sx={{ fontSize: 32, color: 'primary.main' }} />
           <Typography
             variant="h6"
@@ -52,7 +66,7 @@ const Header: React.FC = () => {
           >
             Tasks Manager
           </Typography>
-        </Box>
+        </Link>
 
         {/* Desktop Navigation */}
         {isMdUp && (
