@@ -117,6 +117,15 @@ const TaskDetails: React.FC = () => {
               ))}
             </div>
           )}
+
+          {task.createdBy && (
+            <div className="text-xs text-gray-400 w-full border-t border-gray-100 pt-2 flex justify-end">
+              <p>
+                Created {new Date(task.createdAt).toLocaleDateString()} by&nbsp;
+                {task.createdBy.name}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Card Footer */}

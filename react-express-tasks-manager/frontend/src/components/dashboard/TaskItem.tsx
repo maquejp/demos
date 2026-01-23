@@ -16,7 +16,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
 
   return (
     <div
-      className={`transform transition-all duration-200 hover:scale-[1.02] m-2 rounded overflow-hidden w-60 h-90 flex flex-col ${priority.borderClass} ${priority.shadowClass}`}
+      className={`cursor-pointer transform transition-all duration-200 hover:scale-[1.02] m-2 rounded overflow-hidden w-60 h-90 flex flex-col ${priority.borderClass} ${priority.shadowClass}`}
       onClick={() => navigate(`/tasks/${task.id}`)}
     >
       {/* Card Header */}
