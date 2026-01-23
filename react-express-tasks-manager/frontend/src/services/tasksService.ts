@@ -35,8 +35,24 @@ async function update(id: number, task: Task): Promise<TaskResponse> {
   return data;
 }
 
+async function create(task: Task): Promise<TaskResponse> {
+  const response = await fetch(`${BASE}/tasks`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(task),
+  });
+  if (!response.ok) {
+    throw new Error(`Error creating task: ${response.statusText}`);
+  }
+  const data: TaskResponse = await response.json();
+  return data;
+}
+
 export const tasksApi = {
   fetchAll,
   fetchOne,
   update,
+  create,
 };

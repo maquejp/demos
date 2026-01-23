@@ -79,7 +79,7 @@ const TaskForm: React.FC = () => {
   }, [userSearch, fetchUsers, task?.assignedTo]);
 
   useEffect(() => {
-    if (id && id !== 'add') {
+    if (id) {
       tasksApi
         .fetchOne(id)
         .then((response) => {
@@ -91,6 +91,7 @@ const TaskForm: React.FC = () => {
           setLoading(false);
         });
     } else {
+      setTask({} as Task);
       setLoading(false);
     }
   }, [id]);
@@ -104,6 +105,40 @@ const TaskForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
 
+    if (!id) {
+      await handleCreate();
+    } else {
+      await handleUpdate();
+    }
+  };
+
+  const handleCreate = async (): Promise<void> => {
+    if (!task || !currentUser) return;
+
+    // Set metadata before creating
+    const createdBy: TaskUser = {
+      id: currentUser.id,
+      name: currentUser.name,
+      email: currentUser.email,
+      avatar: currentUser.avatar,
+      role: currentUser.role,
+    };
+
+    const taskToCreate: Task = {
+      ...task,
+      createdBy,
+      createdAt: new Date().toISOString(),
+      updatedBy: createdBy,
+      updatedAt: new Date().toISOString(),
+    };
+    const response = await tasksApi.create(taskToCreate);
+    if (response.status === 201) {
+      navigate(`/tasks/${response.data?.id}`);
+    }
+    void taskToCreate;
+  };
+
+  const handleUpdate = async (): Promise<void> => {
     if (!task || !currentUser) return;
 
     // Update metadata before saving
