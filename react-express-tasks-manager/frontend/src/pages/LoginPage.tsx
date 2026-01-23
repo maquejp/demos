@@ -16,6 +16,7 @@ import {
   Avatar,
   useTheme,
 } from '@mui/material';
+import ChecklistIcon from '@mui/icons-material/Checklist';
 import { useUser } from '../hooks/useUser';
 import { LocalStorageService } from '../services/localStorageService';
 
@@ -84,21 +85,7 @@ const LoginPage: React.FC = () => {
                 background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
               }}
             >
-              <svg
-                width="32"
-                height="32"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  stroke="white"
-                />
-              </svg>
+              <ChecklistIcon sx={{ fontSize: 40, color: 'white' }} />
             </Avatar>
             <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 1 }}>
               Tasks Manager

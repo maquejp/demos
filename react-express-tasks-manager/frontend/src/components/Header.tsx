@@ -12,6 +12,7 @@ import {
   useTheme,
 } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ChecklistIcon from '@mui/icons-material/Checklist';
 import { useUser } from '../hooks/useUser';
 
 const Header: React.FC = () => {
@@ -40,49 +41,7 @@ const Header: React.FC = () => {
       <Toolbar>
         {/* Logo Section */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flex: 1 }}>
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ color: theme.palette.primary.main }}
-          >
-            <rect
-              x="4"
-              y="2"
-              width="16"
-              height="20"
-              rx="2"
-              stroke="currentColor"
-              strokeWidth="2"
-              fill="none"
-            />
-            <path
-              d="M8 2V4H16V2"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <path
-              d="M8 10H16"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <path
-              d="M8 14H16"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <path
-              d="M8 18H13"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
+          <ChecklistIcon sx={{ fontSize: 32, color: 'primary.main' }} />
           <Typography
             variant="h6"
             sx={{
