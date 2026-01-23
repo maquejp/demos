@@ -20,6 +20,12 @@ const Header: React.FC = () => {
   const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
   const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
 
+  const menuItems = [
+    { label: 'Home', to: '/' },
+    { label: 'About', to: '/about' },
+    { label: 'Contact', to: '/contact' },
+  ];
+
   return (
     <AppBar
       position="static"
@@ -92,63 +98,28 @@ const Header: React.FC = () => {
         {/* Desktop Navigation */}
         {isMdUp && (
           <Stack direction="row" spacing={1} sx={{ flex: 1 }}>
-            <Link
-              component={RouterLink}
-              to="/"
-              sx={{
-                color: 'text.primary',
-                textDecoration: 'none',
-                px: 1.5,
-                py: 1,
-                borderRadius: 1,
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                '&:hover': {
-                  color: 'primary.main',
-                  backgroundColor: 'action.hover',
-                },
-              }}
-            >
-              Home
-            </Link>
-            <Link
-              component={RouterLink}
-              to="/about"
-              sx={{
-                color: 'text.primary',
-                textDecoration: 'none',
-                px: 1.5,
-                py: 1,
-                borderRadius: 1,
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                '&:hover': {
-                  color: 'primary.main',
-                  backgroundColor: 'action.hover',
-                },
-              }}
-            >
-              About
-            </Link>
-            <Link
-              component={RouterLink}
-              to="/contact"
-              sx={{
-                color: 'text.primary',
-                textDecoration: 'none',
-                px: 1.5,
-                py: 1,
-                borderRadius: 1,
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                '&:hover': {
-                  color: 'primary.main',
-                  backgroundColor: 'action.hover',
-                },
-              }}
-            >
-              Contact
-            </Link>
+            {menuItems.map((item) => (
+              <Link
+                key={item.to}
+                component={RouterLink}
+                to={item.to}
+                sx={{
+                  color: 'text.primary',
+                  textDecoration: 'none',
+                  px: 1.5,
+                  py: 1,
+                  borderRadius: 1,
+                  fontSize: '0.875rem',
+                  fontWeight: 500,
+                  '&:hover': {
+                    color: 'primary.main',
+                    backgroundColor: 'action.hover',
+                  },
+                }}
+              >
+                {item.label}
+              </Link>
+            ))}
           </Stack>
         )}
 
