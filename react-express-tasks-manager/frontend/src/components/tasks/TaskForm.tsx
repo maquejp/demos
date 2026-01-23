@@ -332,6 +332,7 @@ const TaskForm: React.FC = () => {
                   Assigned Users
                 </Typography>
                 <Autocomplete
+                  disableClearable
                   multiple
                   filterSelectedOptions
                   options={userOptions}
