@@ -7,8 +7,8 @@ import Header from './components/Header';
 import WelcomePage from './pages/WelcomePage';
 import LoginPage from './pages/LoginPage';
 import { useUser } from './hooks/useUser';
-import TaskDetails from './components/dashboard/TaskDetails';
-import TaskForm from './components/dashboard/TaskForm';
+import TaskDetails from './components/tasks/TaskDetails';
+import TaskForm from './components/tasks/TaskForm';
 import Loading from './components/Loading';
 
 function App() {

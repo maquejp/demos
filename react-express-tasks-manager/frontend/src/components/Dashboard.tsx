@@ -1,5 +1,5 @@
 import { useUser } from '../hooks/useUser';
-import TasksNavigation from './dashboard/TasksNavigation';
+import TasksNavigation from './tasks/TasksNavigation';
 
 const Dashboard: React.FC = () => {
   const { currentUser } = useUser();
