@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs } from '@mui/material';
+import { Box, Button, Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
 import TasksList from './TasksList';
 
@@ -17,6 +17,18 @@ const TasksNavigation: React.FC = () => {
 
   return (
     <Box component="section" sx={{ py: 2 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'end',
+          alignItems: 'center',
+          mb: 2,
+        }}
+      >
+        <Button variant="contained" color="primary" sx={{ mt: 2 }}>
+          New Task
+        </Button>
+      </Box>
       <Tabs
         value={activeTab}
         onChange={handleChange}
