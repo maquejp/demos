@@ -20,4 +20,13 @@ export class TasksController {
       res.status(500).json({ message: 'Internal server error', error });
     }
   };
+
+  update = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const response = await this.tasksService.update(req, res);
+      res.status(response.status).json(response);
+    } catch (error) {
+      res.status(500).json({ message: 'Internal server error', error });
+    }
+  };
 }

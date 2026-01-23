@@ -140,19 +140,15 @@ const TaskDetails: React.FC = () => {
             </Box>
           )}
 
-          {task.updatedBy && (
-            <>
-              <Divider sx={{ my: 2 }} />
-              <Typography
-                variant="caption"
-                color="text.secondary"
-                sx={{ display: 'flex', justifyContent: 'flex-end' }}
-              >
-                Last modified {new Date(task.updatedAt).toLocaleDateString()}{' '}
-                by&nbsp;
-                <strong>{task.updatedBy.name}</strong>
-              </Typography>
-            </>
+          {task.assignedTo && (
+            <Box sx={{ mb: 2 }}>
+              <p>Assigned to:</p>
+              <Stack direction="row" spacing={1}>
+                {task.assignedTo.map((user) => (
+                  <Chip key={user.id} label={user.name} />
+                ))}
+              </Stack>
+            </Box>
           )}
         </CardContent>
 

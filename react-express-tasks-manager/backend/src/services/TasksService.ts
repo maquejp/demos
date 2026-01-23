@@ -447,4 +447,34 @@ export class TasksService {
       data: task,
     };
   }
+
+  async update(req: Request, _res: Response): Promise<TaskResponse> {
+    if (!req.params.id) {
+      return {
+        status: 400,
+        data: null,
+      };
+    }
+    const id = Number(req.params.id);
+    const taskIndex = tasks.findIndex((t) => t.id === id);
+    if (taskIndex === -1) {
+      return {
+        status: 404,
+        data: null,
+      };
+    }
+    const updatedTaskData: Partial<Task> = req.body;
+    const existingTask = tasks[taskIndex];
+    const updatedTask: Task = {
+      ...existingTask,
+      ...updatedTaskData,
+      id: existingTask.id, // Ensure ID is not changed
+      updatedAt: new Date().toISOString(),
+    };
+    tasks[taskIndex] = updatedTask;
+    return {
+      status: 200,
+      data: updatedTask,
+    };
+  }
 }

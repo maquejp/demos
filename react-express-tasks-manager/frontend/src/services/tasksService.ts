@@ -1,4 +1,4 @@
-import type { TaskResponse, TasksResponse } from '../types/Task';
+import type { Task, TaskResponse, TasksResponse } from '../types/Task';
 
 const BASE = '/api';
 
@@ -20,7 +20,23 @@ async function fetchOne(id: string): Promise<TaskResponse> {
   return data;
 }
 
+async function update(id: number, task: Task): Promise<TaskResponse> {
+  const response = await fetch(`${BASE}/tasks/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(task),
+  });
+  if (!response.ok) {
+    throw new Error(`Error updating task: ${response.statusText}`);
+  }
+  const data: TaskResponse = await response.json();
+  return data;
+}
+
 export const tasksApi = {
   fetchAll,
   fetchOne,
+  update,
 };

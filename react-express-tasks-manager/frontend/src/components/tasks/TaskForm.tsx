@@ -26,11 +26,13 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import type { Task, TaskUser } from '../../types/Task';
 import { tasksApi } from '../../services/tasksService';
 import { UsersService } from '../../services/usersService';
+import { useUser } from '../../hooks/useUser';
 import Loading from '../Loading';
 import TagsList from './TagsList';
 import type { User } from '../../types/User';
 
 const TaskForm: React.FC = () => {
+  const { currentUser } = useUser();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
@@ -97,9 +99,30 @@ const TaskForm: React.FC = () => {
     return <Alert severity="error">Error: {errors.join(', ')}</Alert>;
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    // TODO: Implement task save functionality
+
+    if (!task || !currentUser) return;
+
+    // Update metadata before saving
+    const updatedBy: TaskUser = {
+      id: currentUser.id,
+      name: currentUser.name,
+      email: currentUser.email,
+      avatar: currentUser.avatar,
+      role: currentUser.role,
+    };
+
+    const taskToSave: Task = {
+      ...task,
+      updatedBy,
+      updatedAt: new Date().toISOString(),
+    };
+    const response = await tasksApi.update(taskToSave.id, taskToSave);
+    if (response.status === 200) {
+      navigate(`/tasks/${response.data?.id}`);
+    }
+    void taskToSave;
   };
 
   const addTag = (e: React.KeyboardEvent<HTMLInputElement>) => {
