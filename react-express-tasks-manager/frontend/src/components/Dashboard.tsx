@@ -1,15 +1,20 @@
+import { Box, Typography } from '@mui/material';
 import { useUser } from '../hooks/useUser';
 import TasksNavigation from './tasks/TasksNavigation';
 
 const Dashboard: React.FC = () => {
   const { currentUser } = useUser();
   return (
-    <div>
-      <h1 className="text-xl font-bold text-gray-900">
+    <Box>
+      <Typography
+        variant="h5"
+        fontWeight="bold"
+        sx={{ color: 'text.primary', mb: 2 }}
+      >
         Welcome, {currentUser?.name}
-      </h1>
+      </Typography>
       <TasksNavigation />
-    </div>
+    </Box>
   );
 };
 

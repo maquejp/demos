@@ -1,8 +1,23 @@
+import { Box, Container, Typography } from '@mui/material';
+
 const Footer: React.FC = () => {
   return (
-    <footer className="z-10 max-w-6xl mx-auto text-center border-t border-gray-200 py-4 mt-8">
-      <p className="text-black/60 text-sm">© 2026 Task Manager</p>
-    </footer>
+    <Box
+      component="footer"
+      sx={{
+        zIndex: 10,
+        borderTop: 1,
+        borderTopColor: 'divider',
+        py: 2,
+        mt: 4,
+      }}
+    >
+      <Container maxWidth="lg" sx={{ textAlign: 'center' }}>
+        <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+          © 2026 Task Manager
+        </Typography>
+      </Container>
+    </Box>
   );
 };
 

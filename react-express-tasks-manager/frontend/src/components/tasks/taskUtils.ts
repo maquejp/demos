@@ -6,16 +6,19 @@ export const getPriority = (priority: Task['priority']) => {
       borderClass: 'border border-danger-500',
       headerClass: 'bg-danger-500',
       shadowClass: 'hover:shadow-[var(--shadow-priority-high)]',
+      color: '#ef4444',
     },
     medium: {
       borderClass: 'border border-warning-500',
       headerClass: 'bg-warning-500',
       shadowClass: 'hover:shadow-[var(--shadow-priority-medium)]',
+      color: '#f59e0b',
     },
     low: {
       borderClass: 'border border-success-500',
       headerClass: 'bg-success-500',
       shadowClass: 'hover:shadow-[var(--shadow-priority-low)]',
+      color: '#10b981',
     },
   };
 
@@ -24,6 +27,7 @@ export const getPriority = (priority: Task['priority']) => {
       borderClass: 'border border-warning-500',
       headerClass: 'bg-warning-500',
       shadowClass: 'hover:shadow-[var(--shadow-priority-medium)]',
+      color: '#f59e0b',
     }
   );
 };
@@ -31,14 +35,24 @@ export const getPriority = (priority: Task['priority']) => {
 export const getStatusColor = (status: Task['status']) => {
   switch (status) {
     case 'todo':
-      return 'bg-gray-100 text-gray-700';
+      return 'warning';
     case 'in-progress':
-      return 'bg-blue-100 text-blue-700';
+      return 'info';
     case 'completed':
-      return 'bg-green-100 text-green-700';
+      return 'success';
     case 'cancelled':
-      return 'bg-red-100 text-red-700';
+      return 'error';
     default:
-      return 'bg-gray-100 text-gray-700';
+      return 'default';
   }
 };
+
+export const getStatusColorMap = (): Record<
+  string,
+  'default' | 'primary' | 'secondary' | 'error' | 'warning' | 'info' | 'success'
+> => ({
+  'in-progress': 'info',
+  todo: 'warning',
+  completed: 'success',
+  cancelled: 'error',
+});

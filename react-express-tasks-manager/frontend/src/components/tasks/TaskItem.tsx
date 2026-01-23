@@ -3,6 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { getPriority, getStatusColor } from './taskUtils';
 import { useUser } from '../../hooks/useUser';
 import TaskHeader from './TaskHeader';
+import TagsList from './TagsList';
+import {
+  Card,
+  CardContent,
+  Box,
+  Typography,
+  Chip,
+  Stack,
+  Divider,
+} from '@mui/material';
+import EventIcon from '@mui/icons-material/Event';
 
 interface TaskItemProps {
   task: Task;
@@ -18,9 +29,24 @@ const TaskItem: React.FC<TaskItemProps> = ({
   const navigate = useNavigate();
 
   return (
-    <div
-      className={`cursor-pointer transform transition-all duration-200 hover:scale-[1.02] m-2 rounded overflow-hidden w-70 h-100 flex flex-col ${priority.borderClass} ${priority.shadowClass}`}
+    <Card
       onClick={() => navigate(`/tasks/${task.id}`)}
+      sx={{
+        cursor: 'pointer',
+        transform: 'scale(1)',
+        transition: 'all 200ms ease-in-out',
+        m: 1,
+        width: 280,
+        height: 'auto',
+        maxHeight: 400,
+        display: 'flex',
+        flexDirection: 'column',
+        '&:hover': {
+          transform: 'scale(1.02)',
+          boxShadow: 3,
+        },
+        borderLeft: `4px solid ${priority.color || '#3b82f6'}`,
+      }}
     >
       {/* Card Header */}
       <TaskHeader
@@ -30,113 +56,114 @@ const TaskItem: React.FC<TaskItemProps> = ({
       />
 
       {/* Card Body */}
-      <div className="p-4 bg-white flex-1 overflow-y-auto">
+      <CardContent sx={{ flex: 1, overflowY: 'auto', pb: 1 }}>
         {task.projectId && (
-          <div className="mb-2">
-            <span className="text-xs text-gray-500">
+          <Box sx={{ mb: 1 }}>
+            <Typography variant="caption" color="text.secondary">
               Project ID: {task.projectId}
-            </span>
-          </div>
+            </Typography>
+          </Box>
         )}
         {!task.projectId && (
-          <div className="mb-2">
-            <span className="text-xs text-gray-500">Standalone task</span>
-          </div>
+          <Box sx={{ mb: 1 }}>
+            <Typography variant="caption" color="text.secondary">
+              Standalone task
+            </Typography>
+          </Box>
         )}
 
-        <p className="text-gray-600 text-sm line-clamp-2 mb-3">
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{
+            mb: 2,
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+          }}
+        >
           {task.description}
-        </p>
+        </Typography>
 
         {showStatus && (
-          <div className="p-3 bg-gray-50 border-t border-gray-200  mb-3">
-            <span
-              className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(task.status)} transition-all duration-200 hover:scale-105 cursor-default inline-block`}
-            >
-              {task.status.replace('-', ' ')}
-            </span>
-          </div>
+          <Box
+            sx={{
+              p: 1.5,
+              backgroundColor: 'action.hover',
+              border: 1,
+              borderColor: 'divider',
+              borderRadius: 1,
+              mb: 2,
+            }}
+          >
+            <Chip
+              label={task.status.replace('-', ' ')}
+              size="small"
+              color={getStatusColor(task.status)}
+              variant="outlined"
+            />
+          </Box>
         )}
 
-        {task.dueDate && (
-          <div className="flex items-center gap-1 text-sm text-gray-500 mb-3">
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+        <Stack spacing={1} sx={{ mb: 2 }}>
+          {task.dueDate && (
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+              <EventIcon
+                sx={{ width: 16, height: 16, color: 'text.secondary' }}
               />
-            </svg>
-            Due: {new Date(task.dueDate).toLocaleDateString()}
-          </div>
-        )}
+              <Typography variant="caption" color="text.secondary">
+                Due: {new Date(task.dueDate).toLocaleDateString()}
+              </Typography>
+            </Box>
+          )}
 
-        {task.endDate && (
-          <div className="flex items-center gap-1 text-sm text-gray-500 mb-3">
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+          {task.endDate && (
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+              <EventIcon
+                sx={{ width: 16, height: 16, color: 'text.secondary' }}
               />
-            </svg>
-            End: {new Date(task.endDate).toLocaleDateString()}
-          </div>
-        )}
+              <Typography variant="caption" color="text.secondary">
+                End: {new Date(task.endDate).toLocaleDateString()}
+              </Typography>
+            </Box>
+          )}
 
-        {!task.endDate && task.startDate && (
-          <div className="flex items-center gap-1 text-sm text-gray-500 mb-3">
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+          {!task.endDate && task.startDate && (
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+              <EventIcon
+                sx={{ width: 16, height: 16, color: 'text.secondary' }}
               />
-            </svg>
-            Start: {new Date(task.startDate).toLocaleDateString()}
-          </div>
-        )}
+              <Typography variant="caption" color="text.secondary">
+                Start: {new Date(task.startDate).toLocaleDateString()}
+              </Typography>
+            </Box>
+          )}
+        </Stack>
 
         {task.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1 mb-3">
-            {task.tags.map((tag, index) => (
-              <span
-                key={index}
-                className="px-2 py-1 bg-primary-100 text-primary-700 text-xs font-bold rounded-full bg-blue-100 flex items-center"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+          <Box sx={{ mb: 2 }}>
+            <TagsList tags={task.tags} />
+          </Box>
         )}
-      </div>
+      </CardContent>
 
       {/* Card Footer */}
-      <div className="p-3 bg-gray-50 border-t border-gray-200 text-right shrink-0">
-        <div className="border-t border-gray-100 text-xs text-gray-400">
+      <Divider />
+      <Box
+        sx={{
+          p: 1.5,
+          backgroundColor: 'action.hover',
+          textAlign: 'right',
+          flexShrink: 0,
+        }}
+      >
+        <Typography variant="caption" color="text.secondary">
           Last modified {new Date(task.updatedAt).toLocaleDateString()}
           <br /> by&nbsp;{task.updatedBy.name}
-        </div>
-      </div>
-    </div>
+        </Typography>
+      </Box>
+    </Card>
   );
 };
 

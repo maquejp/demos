@@ -1,5 +1,20 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import {
+  Box,
+  Container,
+  Card,
+  TextField,
+  Button,
+  FormControlLabel,
+  Checkbox,
+  Alert,
+  Typography,
+  Divider,
+  Stack,
+  CircularProgress,
+  Avatar,
+} from '@mui/material';
 import { useUser } from '../hooks/useUser';
 import { LocalStorageService } from '../services/localStorageService';
 
@@ -44,202 +59,251 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-primary-50 to-secondary-50 flex items-center justify-center p-4">
-      <div className="max-w-md w-full space-y-8">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-linear-to-br from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center mx-auto mb-4">
-            <svg
-              className="w-8 h-8 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+    <Box
+      sx={{
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        py: 4,
+      }}
+    >
+      <Container maxWidth="sm">
+        <Stack spacing={4}>
+          {/* Header */}
+          <Box sx={{ textAlign: 'center' }}>
+            <Avatar
+              sx={{
+                width: 64,
+                height: 64,
+                mx: 'auto',
+                mb: 2,
+                background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+              }}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Tasks Manager
-          </h1>
-          <p className="text-gray-600">
-            Powerful task management dashboard to track projects, monitor
-            ongoing and completed tasks, and visualize your team's productivity
-            with intuitive charts.
-          </p>
-          <p className="text-gray-600 p-5">
-            Sign in to manage your tasks and projects
-          </p>
-        </div>
+              <svg
+                width="32"
+                height="32"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  stroke="white"
+                />
+              </svg>
+            </Avatar>
+            <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 1 }}>
+              Tasks Manager
+            </Typography>
+            <Typography variant="body2" color="textSecondary" sx={{ mb: 1 }}>
+              Powerful task management dashboard to track projects, monitor
+              ongoing and completed tasks, and visualize your team's
+              productivity with intuitive charts.
+            </Typography>
+            <Typography variant="body2" color="textSecondary">
+              Sign in to manage your tasks and projects
+            </Typography>
+          </Box>
 
-        {/* Login Form */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-              Sign In
-            </h2>
+          {/* Login Form Card */}
+          <Card sx={{ p: 3 }}>
+            <Box component="form" onSubmit={handleSubmit} noValidate>
+              <Typography
+                variant="h6"
+                sx={{ fontWeight: 'bold', mb: 3, textAlign: 'center' }}
+              >
+                Sign In
+              </Typography>
 
-            {/* Error Message */}
-            {error && (
-              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-                <p className="text-sm text-red-600">{error}</p>
-              </div>
-            )}
+              {/* Error Message */}
+              {error && (
+                <Alert severity="error" sx={{ mb: 2 }}>
+                  {error}
+                </Alert>
+              )}
 
-            {/* Email Field */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address
-              </label>
-              <input
+              {/* Email Field */}
+              <TextField
+                fullWidth
+                label="Email Address"
                 type="email"
                 value={formData.email}
                 onChange={(e) =>
                   setFormData((prev) => ({ ...prev, email: e.target.value }))
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 placeholder="you@example.com"
                 required
+                margin="normal"
               />
-            </div>
 
-            {/* Password Field */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Password
-              </label>
-              <input
+              {/* Password Field */}
+              <TextField
+                fullWidth
+                label="Password"
                 type="password"
                 value={formData.password}
                 onChange={(e) =>
                   setFormData((prev) => ({ ...prev, password: e.target.value }))
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                placeholder="•••••••••"
+                placeholder="••••••••"
                 required
+                margin="normal"
               />
-            </div>
 
-            {/* Remember Me */}
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                id="remember"
-                checked={formData.rememberMe}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    rememberMe: e.target.checked,
-                  }))
+              {/* Remember Me */}
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={formData.rememberMe}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        rememberMe: e.target.checked,
+                      }))
+                    }
+                  />
                 }
-                className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                label="Remember me"
+                sx={{ mt: 2, mb: 2 }}
               />
-              <label htmlFor="remember" className="ml-2 text-sm text-gray-700">
-                Remember me
-              </label>
-            </div>
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-            >
-              {isLoading ? (
-                <>
-                  <svg
-                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
+              {/* Submit Button */}
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                disabled={isLoading}
+                sx={{
+                  py: 1.5,
+                  mt: 2,
+                  textTransform: 'none',
+                  fontSize: '1rem',
+                }}
+              >
+                {isLoading ? (
+                  <Stack direction="row" spacing={1} alignItems="center">
+                    <CircularProgress size={20} color="inherit" />
+                    <span>Signing in...</span>
+                  </Stack>
+                ) : (
+                  'Sign In'
+                )}
+              </Button>
+
+              {/* Clear Storage Option for Testing */}
+              <Box sx={{ mt: 2, textAlign: 'center' }}>
+                <Button
+                  size="small"
+                  onClick={() => {
+                    localStorage.clear();
+                    setError('');
+                    window.location.reload();
+                  }}
+                  sx={{
+                    textTransform: 'none',
+                    fontSize: '0.75rem',
+                    color: 'text.secondary',
+                    '&:hover': { textDecoration: 'underline' },
+                  }}
+                >
+                  Clear All Data (Testing)
+                </Button>
+              </Box>
+
+              <Divider sx={{ my: 3 }} />
+
+              {/* Quick Login Actions */}
+              <Stack spacing={2}>
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  onClick={() => {
+                    setFormData({
+                      email: 'alex@example.com',
+                      password: 'password123',
+                      rememberMe: false,
+                    });
+                    setError('');
+                  }}
+                  sx={{ textTransform: 'none' }}
+                >
+                  Use Alex Account
+                </Button>
+
+                <Box
+                  sx={{
+                    textAlign: 'center',
+                    color: 'text.secondary',
+                    typography: 'caption',
+                  }}
+                >
+                  OR
+                </Box>
+
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  onClick={() => {
+                    setFormData({
+                      email: 'sarah@example.com',
+                      password: 'password123',
+                      rememberMe: false,
+                    });
+                    setError('');
+                  }}
+                  sx={{ textTransform: 'none' }}
+                >
+                  Use Sarah Account
+                </Button>
+              </Stack>
+
+              {/* Links */}
+              <Box sx={{ mt: 3, textAlign: 'center' }}>
+                <Stack direction="row" spacing={2} justifyContent="center">
+                  <Link
+                    to="/forgot-password"
+                    style={{ textDecoration: 'none' }}
                   >
-                    <path d="M4 12a8 8 0 4-4 0 0 1 4 1 4 0 0 1 1 4 1 0 4-2 2 2 0 4 4-0-1-1-1 1-1-1 1-1-1-1z" />
-                  </svg>
-                  <span>Signing in...</span>
-                </>
-              ) : (
-                <span>Sign In</span>
-              )}
-            </button>
-          </form>
-
-          {/* Clear Storage Option for Testing */}
-          <div className="mt-4 text-center">
-            <button
-              onClick={() => {
-                localStorage.clear();
-                setError('');
-                window.location.reload();
-              }}
-              className="text-xs text-gray-500 hover:text-gray-700 underline"
-            >
-              Clear All Data (Testing)
-            </button>
-          </div>
-
-          {/* Quick Login Actions */}
-          <div className="mt-6 text-center">
-            <div className="space-y-2">
-              <button
-                onClick={() => {
-                  setFormData({
-                    email: 'alex@example.com',
-                    password: 'password123',
-                    rememberMe: false,
-                  });
-                  setError('');
-                }}
-                className="w-full btn-secondary text-sm"
-              >
-                Use Alex Account
-              </button>
-
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="px-3 bg-gray-100 text-gray-500 text-sm">
-                    OR
-                  </span>
-                </div>
-              </div>
-
-              <button
-                onClick={() => {
-                  setFormData({
-                    email: 'sarah@example.com',
-                    password: 'password123',
-                    rememberMe: false,
-                  });
-                  setError('');
-                }}
-                className="w-full btn-secondary text-sm"
-              >
-                Use Sarah Account
-              </button>
-            </div>
-
-            {/* Links */}
-            <div className="mt-8 text-center space-x-4 text-sm">
-              <Link
-                to="/forgot-password"
-                className="text-primary-600 hover:text-primary-700"
-              >
-                Forgot Password?
-              </Link>
-              <Link
-                to="/register"
-                className="text-primary-600 hover:text-primary-700"
-              >
-                Create Account
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+                    <Typography
+                      component="span"
+                      sx={{
+                        color: 'primary.main',
+                        cursor: 'pointer',
+                        '&:hover': { textDecoration: 'underline' },
+                        fontSize: '0.875rem',
+                      }}
+                    >
+                      Forgot Password?
+                    </Typography>
+                  </Link>
+                  <Link to="/register" style={{ textDecoration: 'none' }}>
+                    <Typography
+                      component="span"
+                      sx={{
+                        color: 'primary.main',
+                        cursor: 'pointer',
+                        '&:hover': { textDecoration: 'underline' },
+                        fontSize: '0.875rem',
+                      }}
+                    >
+                      Create Account
+                    </Typography>
+                  </Link>
+                </Stack>
+              </Box>
+            </Box>
+          </Card>
+        </Stack>
+      </Container>
+    </Box>
   );
 };
 

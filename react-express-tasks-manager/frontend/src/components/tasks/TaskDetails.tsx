@@ -1,11 +1,27 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import {
+  Card,
+  CardContent,
+  CardActions,
+  Box,
+  Button,
+  Typography,
+  Chip,
+  Stack,
+  Alert,
+  Divider,
+} from '@mui/material';
+import EventIcon from '@mui/icons-material/Event';
+import EditIcon from '@mui/icons-material/Edit';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import type { Task } from '../../types/Task';
 import { tasksApi } from '../../services/tasksService';
-import { getPriority } from './taskUtils';
+import { getPriority, getStatusColor } from './taskUtils';
 import Loading from '../Loading';
 import { useUser } from '../../hooks/useUser';
 import TaskHeader from './TaskHeader';
+import TagsList from './TagsList';
 
 const TaskDetails: React.FC = () => {
   const { currentUser } = useUser();
@@ -28,19 +44,29 @@ const TaskDetails: React.FC = () => {
         setLoading(false);
       });
   }, [id]);
+
   if (!id) {
-    return <p>Invalid task ID.</p>;
+    return <Alert severity="error">Invalid task ID.</Alert>;
   }
+
   if (loading) return <Loading message="Loading task details..." />;
-  if (!loading && errors) return <p>Error: {errors.join(', ')}</p>;
-  if (!task) {
-    return <p>Task not found.</p>;
+
+  if (!loading && errors) {
+    return <Alert severity="error">Error: {errors.join(', ')}</Alert>;
   }
+
+  if (!task) {
+    return <Alert severity="warning">Task not found.</Alert>;
+  }
+
   const priority = getPriority(task.priority);
+
   return (
-    <div>
-      <div
-        className={`transform transition-all duration-200  m-2 rounded overflow-hidden w-full flex flex-col ${priority.borderClass} `}
+    <Box sx={{ p: 2 }}>
+      <Card
+        sx={{
+          borderLeft: `4px solid ${priority.color || '#3b82f6'}`,
+        }}
       >
         {/* Card Header */}
         <TaskHeader
@@ -50,107 +76,110 @@ const TaskDetails: React.FC = () => {
         />
 
         {/* Card Body */}
-        <div className="p-4 bg-white flex-1 overflow-y-auto">
+        <CardContent>
           {task.projectId && (
-            <div className="mb-2">
-              <span className="text-xs text-gray-500">
+            <Box sx={{ mb: 2 }}>
+              <Typography variant="caption" color="text.secondary">
                 Project ID: {task.projectId}
-              </span>
-            </div>
+              </Typography>
+            </Box>
           )}
           {!task.projectId && (
-            <div className="mb-2">
-              <span className="text-xs text-gray-500">Standalone task</span>
-            </div>
+            <Box sx={{ mb: 2 }}>
+              <Typography variant="caption" color="text.secondary">
+                Standalone task
+              </Typography>
+            </Box>
           )}
 
-          <p className="text-gray-600 text-sm line-clamp-2 mb-3">
+          <Typography
+            variant="body1"
+            color="text.secondary"
+            sx={{
+              mb: 2,
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+            }}
+          >
             {task.description}
-          </p>
+          </Typography>
 
-          <div className="mb-3">
-            <span>{task.status.replace('-', ' ')}</span>
-          </div>
+          <Box sx={{ mb: 2 }}>
+            <Chip
+              label={task.status.replace('-', ' ')}
+              color={getStatusColor(task.status)}
+              variant="outlined"
+            />
+          </Box>
 
-          <div className="flex items-center gap-1 text-sm text-gray-500 mb-3">
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
-            Due:{' '}
-            {task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'N/A'}
-          </div>
+          <Stack spacing={1.5} sx={{ mb: 2 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <EventIcon sx={{ fontSize: 18, color: 'text.secondary' }} />
+              <Typography variant="body2" color="text.secondary">
+                Due:{' '}
+                {task.dueDate
+                  ? new Date(task.dueDate).toLocaleDateString()
+                  : 'N/A'}
+              </Typography>
+            </Box>
 
-          <div className="flex items-center gap-1 text-sm text-gray-500 mb-3">
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
-            Start:{' '}
-            {task.startDate
-              ? new Date(task.startDate).toLocaleDateString()
-              : 'N/A'}
-          </div>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <EventIcon sx={{ fontSize: 18, color: 'text.secondary' }} />
+              <Typography variant="body2" color="text.secondary">
+                Start:{' '}
+                {task.startDate
+                  ? new Date(task.startDate).toLocaleDateString()
+                  : 'N/A'}
+              </Typography>
+            </Box>
+          </Stack>
 
           {task.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1 mb-3">
-              {task.tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="px-2 py-1 bg-primary-100 text-primary-700 text-sm font-bold rounded-full bg-blue-100 flex items-center"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+            <Box sx={{ mb: 2 }}>
+              <TagsList tags={task.tags} />
+            </Box>
           )}
 
           {task.updatedBy && (
-            <div className="text-xs text-gray-400 w-full border-t border-gray-100 pt-2 flex justify-end">
-              <p>
+            <>
+              <Divider sx={{ my: 2 }} />
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                sx={{ display: 'flex', justifyContent: 'flex-end' }}
+              >
                 Last modified {new Date(task.updatedAt).toLocaleDateString()}{' '}
                 by&nbsp;
-                {task.updatedBy.name}
-              </p>
-            </div>
+                <strong>{task.updatedBy.name}</strong>
+              </Typography>
+            </>
           )}
-        </div>
+        </CardContent>
 
         {/* Card Footer */}
-        <div className="p-3 bg-gray-50 border-t border-gray-200 text-right shrink-0 flex justify-between gap-4">
-          <button
-            className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+        <Divider />
+        <CardActions sx={{ justifyContent: 'space-between', p: 2 }}>
+          <Button
+            variant="contained"
+            startIcon={<EditIcon />}
             onClick={() => navigate(`/tasks/${task.id}/edit`)}
+            size="small"
           >
             Edit
-          </button>
-          <button
-            className="btn-secondary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-            onClick={() => navigate(`/`)}
+          </Button>
+          <Button
+            variant="outlined"
+            startIcon={<ArrowBackIcon />}
+            onClick={() => navigate('/')}
+            size="small"
           >
             Back
-          </button>
-        </div>
-      </div>
-    </div>
+          </Button>
+        </CardActions>
+      </Card>
+    </Box>
   );
 };
 

@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { Box, Container } from '@mui/material';
 
 import './App.css';
 
@@ -28,10 +29,10 @@ function App() {
           currentUser ? (
             <Navigate to="/" replace />
           ) : (
-            <div className="min-h-screen bg-gray-50">
+            <Box sx={{ minHeight: '100vh', backgroundColor: '#f9fafb' }}>
               <LoginPage />
               <Footer></Footer>
-            </div>
+            </Box>
           )
         }
       />
@@ -41,18 +42,18 @@ function App() {
         path="/*"
         element={
           currentUser ? (
-            <div className="min-h-screen bg-gray-50">
+            <Box sx={{ minHeight: '100vh', backgroundColor: '#f9fafb' }}>
               <Header></Header>
-              <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+              <Container maxWidth="lg" sx={{ py: 4 }}>
                 <Routes>
                   <Route path="/" element={<WelcomePage />} />
                   <Route path="/tasks/add" element={<TaskForm />} />
                   <Route path="/tasks/:id" element={<TaskDetails />} />
                   <Route path="/tasks/:id/edit" element={<TaskForm />} />
                 </Routes>
-              </main>
+              </Container>
               <Footer></Footer>
-            </div>
+            </Box>
           ) : (
             <Navigate to="/login" replace />
           )

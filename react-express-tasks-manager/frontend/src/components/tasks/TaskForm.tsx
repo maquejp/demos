@@ -1,8 +1,29 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import {
+  Box,
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Button,
+  Chip,
+  Stack,
+  Typography,
+  Divider,
+  Alert,
+} from '@mui/material';
+import SaveIcon from '@mui/icons-material/Save';
+import CancelIcon from '@mui/icons-material/Cancel';
 import type { Task } from '../../types/Task';
 import { tasksApi } from '../../services/tasksService';
 import Loading from '../Loading';
+import TagsList from './TagsList';
 
 const TaskForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -26,13 +47,16 @@ const TaskForm: React.FC = () => {
         });
     }
   }, [id]);
+
   if (loading) return <Loading message="Loading task..." />;
-  if (!loading && errors) return <p>Error: {errors.join(', ')}</p>;
+
+  if (!loading && errors) {
+    return <Alert severity="error">Error: {errors.join(', ')}</Alert>;
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send formData to the backend API
-    console.log(task);
+    // TODO: Implement task save functionality
   };
 
   const addTag = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -61,104 +85,99 @@ const TaskForm: React.FC = () => {
   };
 
   return (
-    <div>
-      <div
-        className={`transform transition-all duration-200 m-2 rounded overflow-hidden w-full h-full flex flex-col }`}
-      >
+    <Box sx={{ p: 2 }}>
+      <Card>
         {/* Card Header */}
-        <div className="p-4 bg-white border-b border-gray-500">
-          <h3 className="text-sm font-semibold">
-            {task ? 'Edit Task' : 'Add New Task'}
-          </h3>
-        </div>
+        <CardHeader
+          title={task ? 'Edit Task' : 'Add New Task'}
+          sx={{ borderBottom: 1, borderBottomColor: 'divider' }}
+        />
 
         {/* Card Body */}
-        <div className="p-4 bg-white flex-1 overflow-y-auto">
-          <form onSubmit={handleSubmit} className="p-6 space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Title *
-              </label>
-              <input
-                type="text"
+        <CardContent>
+          <Box component="form" onSubmit={handleSubmit} noValidate>
+            <Stack spacing={3}>
+              {/* Title */}
+              <TextField
+                fullWidth
+                label="Title"
+                required
                 value={task?.title || ''}
                 onChange={(e) =>
                   setTask((prev) =>
                     prev ? { ...prev, title: e.target.value } : prev,
                   )
                 }
-                className="input-field"
-                required
               />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Description *
-              </label>
-              <textarea
+
+              {/* Description */}
+              <TextField
+                fullWidth
+                label="Description"
+                required
+                multiline
+                rows={4}
                 value={task?.description || ''}
                 onChange={(e) =>
                   setTask((prev) =>
                     prev ? { ...prev, description: e.target.value } : prev,
                   )
                 }
-                className="input-field"
-                required
               />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Status
-                </label>
-                <select
-                  value={task?.status || ''}
-                  onChange={(e) =>
-                    setTask((prev) =>
-                      prev
-                        ? { ...prev, status: e.target.value as Task['status'] }
-                        : prev,
-                    )
-                  }
-                  className="input-field"
-                >
-                  <option value="todo">To Do</option>
-                  <option value="in-progress">In Progress</option>
-                  <option value="completed">Completed</option>
-                  <option value="cancelled">Cancelled</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Priority
-                </label>
-                <select
-                  value={task?.priority || ''}
-                  onChange={(e) =>
-                    setTask((prev) =>
-                      prev
-                        ? {
-                            ...prev,
-                            priority: e.target.value as Task['priority'],
-                          }
-                        : prev,
-                    )
-                  }
-                  className="input-field"
-                >
-                  <option value="low">Low</option>
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
-                </select>
-              </div>
-            </div>
-            <div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Project
-                </label>
-                <select
+
+              {/* Status and Priority */}
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                <FormControl fullWidth>
+                  <InputLabel>Status</InputLabel>
+                  <Select
+                    value={task?.status || ''}
+                    label="Status"
+                    onChange={(e) =>
+                      setTask((prev) =>
+                        prev
+                          ? {
+                              ...prev,
+                              status: e.target.value as Task['status'],
+                            }
+                          : prev,
+                      )
+                    }
+                  >
+                    <MenuItem value="todo">To Do</MenuItem>
+                    <MenuItem value="in-progress">In Progress</MenuItem>
+                    <MenuItem value="completed">Completed</MenuItem>
+                    <MenuItem value="cancelled">Cancelled</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl fullWidth>
+                  <InputLabel>Priority</InputLabel>
+                  <Select
+                    value={task?.priority || ''}
+                    label="Priority"
+                    onChange={(e) =>
+                      setTask((prev) =>
+                        prev
+                          ? {
+                              ...prev,
+                              priority: e.target.value as Task['priority'],
+                            }
+                          : prev,
+                      )
+                    }
+                  >
+                    <MenuItem value="low">Low</MenuItem>
+                    <MenuItem value="medium">Medium</MenuItem>
+                    <MenuItem value="high">High</MenuItem>
+                  </Select>
+                </FormControl>
+              </Stack>
+
+              {/* Project */}
+              <FormControl fullWidth>
+                <InputLabel>Project</InputLabel>
+                <Select
                   value={task?.projectId || ''}
+                  label="Project"
                   onChange={(e) =>
                     setTask((prev) =>
                       prev
@@ -171,155 +190,156 @@ const TaskForm: React.FC = () => {
                         : prev,
                     )
                   }
-                  className="input-field"
                 >
-                  <option value="">Standalone Task</option>
-                </select>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <MenuItem value="">Standalone Task</MenuItem>
+                </Select>
+              </FormControl>
+
+              {/* Duration (Start and End Date) */}
+              <Box>
+                <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600 }}>
                   Duration
-                </label>
-                <div className="flex gap-2">
-                  <input
+                </Typography>
+                <Stack
+                  direction={{ xs: 'column', sm: 'row' }}
+                  spacing={1}
+                  sx={{ alignItems: 'center' }}
+                >
+                  <TextField
                     type="date"
+                    label="Start Date"
+                    InputLabelProps={{ shrink: true }}
                     value={task?.startDate ? task.startDate.split('T')[0] : ''}
                     onChange={(e) =>
                       setTask((prev) =>
                         prev ? { ...prev, startDate: e.target.value } : prev,
                       )
                     }
-                    className="input-field"
-                    placeholder="Start Date"
+                    sx={{ flex: 1 }}
                   />
-                  <span className="flex items-center text-gray-500">to</span>
-                  <input
+                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                    to
+                  </Typography>
+                  <TextField
                     type="date"
+                    label="End Date"
+                    InputLabelProps={{ shrink: true }}
                     value={task?.endDate ? task.endDate.split('T')[0] : ''}
                     onChange={(e) =>
                       setTask((prev) =>
                         prev ? { ...prev, endDate: e.target.value } : prev,
                       )
                     }
-                    className="input-field"
-                    placeholder="End Date"
+                    sx={{ flex: 1 }}
                   />
-                </div>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Due Date
-                </label>
-                <input
-                  type="date"
-                  value={task?.dueDate ? task.dueDate.split('T')[0] : ''}
-                  onChange={(e) =>
-                    setTask((prev) =>
-                      prev ? { ...prev, dueDate: e.target.value } : prev,
-                    )
-                  }
-                  className="input-field"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Tags
-              </label>
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  onKeyDown={(e) => addTag(e)}
+                </Stack>
+              </Box>
+
+              {/* Due Date */}
+              <TextField
+                type="date"
+                label="Due Date"
+                InputLabelProps={{ shrink: true }}
+                value={task?.dueDate ? task.dueDate.split('T')[0] : ''}
+                onChange={(e) =>
+                  setTask((prev) =>
+                    prev ? { ...prev, dueDate: e.target.value } : prev,
+                  )
+                }
+              />
+
+              {/* Tags */}
+              <Box>
+                <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600 }}>
+                  Tags
+                </Typography>
+                <TextField
+                  fullWidth
                   placeholder="Press Enter to add tag"
-                  className="input-field flex-1"
+                  onKeyDown={(e) =>
+                    addTag(e as React.KeyboardEvent<HTMLInputElement>)
+                  }
+                  size="small"
+                  sx={{ mb: 1 }}
                 />
-              </div>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {task?.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="px-2 py-1 bg-primary-100 text-primary-700 text-sm font-bold rounded-full bg-blue-100 flex items-center"
-                  >
-                    {tag}
-                    <button
-                      type="button"
-                      onClick={() => {
-                        removeTag(index);
-                      }}
-                      className="ml-1 text-primary-500 hover:text-primary-700 cursor-pointer"
-                      data-index={index}
-                    >
-                      ×
-                    </button>
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Assigned users
-              </label>
-              <div className="flex gap-2">
-                <input
-                  type="text"
+                <Box sx={{ mb: 2 }}>
+                  <TagsList tags={task?.tags || []} onDelete={removeTag} />
+                </Box>
+              </Box>
+
+              {/* Assigned Users */}
+              <Box>
+                <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600 }}>
+                  Assigned Users
+                </Typography>
+                <TextField
+                  fullWidth
                   placeholder="Search and add user"
-                  className="input-field flex-1"
+                  size="small"
+                  sx={{ mb: 1 }}
                 />
-              </div>
-              <div className="mt-2 flex gap-1">
-                {task?.assignedTo.map((user) => (
-                  <span
-                    key={user.id}
-                    className="px-2 py-1 bg-primary-100 text-primary-700 text-sm font-bold rounded-full bg-blue-100 flex items-center"
-                  >
-                    {user.name} ({user.email})
-                    <button
-                      type="button"
-                      onClick={() => {
-                        removeUser(user.id);
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  sx={{ flexWrap: 'wrap', gap: 1 }}
+                >
+                  {task?.assignedTo.map((user) => (
+                    <Chip
+                      key={user.id}
+                      label={`${user.name} (${user.email})`}
+                      onDelete={() => removeUser(user.id)}
+                      color="primary"
+                      variant="filled"
+                      sx={{
+                        backgroundColor: 'primary.light',
+                        color: 'primary.dark',
                       }}
-                      className="ml-1 text-primary-700 cursor-pointer"
-                      data-index={user.id}
-                    >
-                      ×
-                    </button>
-                  </span>
-                ))}
-              </div>
-            </div>
-            {task && task.updatedBy && (
-              <div className="text-xs text-gray-400 w-full border-t border-gray-100 pt-2 flex justify-end">
-                <p>
-                  Last modified {new Date(task.updatedAt).toLocaleDateString()}
-                  &nbsp; by&nbsp;
-                  {task.updatedBy.name}
-                </p>
-              </div>
-            )}
-          </form>
-        </div>
+                    />
+                  ))}
+                </Stack>
+              </Box>
+
+              {/* Last Modified Info */}
+              {task && task.updatedBy && (
+                <>
+                  <Divider />
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    sx={{ textAlign: 'right' }}
+                  >
+                    Last modified{' '}
+                    {new Date(task.updatedAt).toLocaleDateString()} by&nbsp;
+                    <strong>{task.updatedBy.name}</strong>
+                  </Typography>
+                </>
+              )}
+            </Stack>
+          </Box>
+        </CardContent>
 
         {/* Card Footer */}
-        <div className="p-3 bg-gray-50 border-t border-gray-200 text-right shrink-0 flex justify-between">
-          <button
-            className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+        <Divider />
+        <CardActions sx={{ justifyContent: 'space-between', p: 2 }}>
+          <Button
+            variant="contained"
+            startIcon={<SaveIcon />}
             onClick={handleSubmit}
+            size="small"
           >
             Save
-          </button>
-          <button
-            className="btn-secondary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+          </Button>
+          <Button
+            variant="outlined"
+            startIcon={<CancelIcon />}
             onClick={() => navigate(`/tasks/${task?.id}`)}
+            size="small"
           >
             Cancel
-          </button>
-        </div>
-      </div>
-    </div>
+          </Button>
+        </CardActions>
+      </Card>
+    </Box>
   );
 };
 

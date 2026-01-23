@@ -1,36 +1,43 @@
 import { useState } from 'react';
+import { Box, Tabs, Tab } from '@mui/material';
 import TasksList from './TasksList';
 
 const TasksNavigation: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('in-progress');
+  const [activeTab, setActiveTab] = useState(0);
   const tabs = [
     { id: 'in-progress', label: 'In Progress Tasks' },
     { id: 'todo', label: 'To-Do Tasks' },
     { id: 'completed', label: 'Completed Tasks' },
     { id: 'cancelled', label: 'Cancelled Tasks' },
   ];
+
+  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
+    setActiveTab(newValue);
+  };
+
   return (
-    <section className="py-4">
-      {tabs.map((tab) => (
-        <button
-          key={tab.id}
-          className={`px-4 py-2 mr-2 rounded ${
-            activeTab === tab.id
-              ? 'bg-primary-600 text-white'
-              : 'bg-gray-200 text-gray-700'
-          }`}
-          onClick={() => setActiveTab(tab.id)}
-        >
-          {tab.label}
-        </button>
-      ))}
-      <div className="mt-4">
-        {activeTab === 'in-progress' && <TasksList status="in-progress" />}
-        {activeTab === 'todo' && <TasksList status="todo" />}
-        {activeTab === 'completed' && <TasksList status="completed" />}
-        {activeTab === 'cancelled' && <TasksList status="cancelled" />}
-      </div>
-    </section>
+    <Box component="section" sx={{ py: 2 }}>
+      <Tabs
+        value={activeTab}
+        onChange={handleChange}
+        sx={{
+          borderBottom: 1,
+          borderColor: 'divider',
+          mb: 2,
+        }}
+      >
+        {tabs.map((tab, index) => (
+          <Tab key={tab.id} label={tab.label} id={`tab-${index}`} />
+        ))}
+      </Tabs>
+
+      <Box sx={{ mt: 2 }}>
+        {activeTab === 0 && <TasksList status="in-progress" />}
+        {activeTab === 1 && <TasksList status="todo" />}
+        {activeTab === 2 && <TasksList status="completed" />}
+        {activeTab === 3 && <TasksList status="cancelled" />}
+      </Box>
+    </Box>
   );
 };
 
