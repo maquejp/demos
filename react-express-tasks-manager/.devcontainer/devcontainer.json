@@ -1,20 +1,27 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
 {
-  "name": "Node.js & TypeScript",
-  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "name": "Node.js & TypeScript (M3 Optimized)",
   "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
-  // Features to add to the dev container. More info: https://containers.dev/features.
-  // "features": {},
-  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+
+  "mounts": [
+    // Speeds up I/O by keeping node_modules off the Mac host filesystem
+    "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/backend/node_modules,type=volume",
+    "source=${localWorkspaceFolderBasename}-frontend-node_modules,target=${containerWorkspaceFolder}/frontend/node_modules,type=volume"
+  ],
+
   "forwardPorts": [3000, 5173],
-  // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "npm install --prefix backend && npm install --prefix frontend",
-  // Use 'postStartCommand' to run commands after the container is started.
+
+  "postCreateCommand": "sudo chown node backend/node_modules frontend/node_modules && npm install --prefix backend && npm install --prefix frontend",
+
   "postStartCommand": "npm run dev --prefix backend & npm run dev --prefix frontend",
-  // Configure tool-specific properties.
+
   "customizations": {
     "vscode": {
+      "settings": {
+        // Improves performance on macOS by reducing file watcher overhead
+        "files.watcherExclude": {
+          "**/node_modules/**": true
+        }
+      },
       "extensions": [
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
@@ -30,7 +37,6 @@
         "vivaxy.vscode-conventional-commits"
       ]
     }
-  }
-  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  // "remoteUser": "root"
+  },
+  "remoteUser": "node"
 }
