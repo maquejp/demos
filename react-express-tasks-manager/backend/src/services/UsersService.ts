@@ -1,5 +1,6 @@
-import type { Request, Response } from 'express';
 import type { User, UserResponse, UsersResponse } from '@/models/User';
+import { logMessage } from '@/utils/logger';
+import type { Request, Response } from 'express';
 
 export const users: User[] = [
   {
@@ -38,6 +39,7 @@ export const users: User[] = [
 
 export class UsersService {
   async getAll(req: Request, _res: Response): Promise<UsersResponse> {
+    logMessage('Fetching all users', 'info');
     let filteredUsers = users;
 
     // Filter by search query if provided
@@ -77,6 +79,7 @@ export class UsersService {
   }
 
   async getOne(req: Request, _res: Response): Promise<UserResponse> {
+    logMessage(`Fetching user with id: ${req.params.id}`, 'info');
     if (!req.params.id) {
       return {
         status: 400,
@@ -98,6 +101,7 @@ export class UsersService {
   }
 
   async getOneByEmail(req: Request, _res: Response): Promise<UserResponse> {
+    logMessage(`Fetching user with email: ${req.params.email}`, 'info');
     if (!req.params.email) {
       return {
         status: 400,

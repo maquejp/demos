@@ -1,4 +1,3 @@
-import type { Request, Response } from 'express';
 import type {
   Task,
   TaskResponse,
@@ -6,6 +5,8 @@ import type {
   TaskUser,
 } from '@/models/Task';
 import type { User } from '@/models/User';
+import { logMessage } from '@/utils/logger';
+import type { Request, Response } from 'express';
 import { users } from './UsersService';
 
 const userIds: Record<'alex' | 'sarah' | 'mike' | 'emma', User['id']> = {
@@ -426,6 +427,7 @@ const tasks: Task[] = [
 
 export class TasksService {
   async getAll(req: Request, _res: Response): Promise<TasksResponse> {
+    logMessage('Fetching all tasks', 'info');
     const status = req.query.status as string | undefined;
     return {
       status: 200,
@@ -434,6 +436,7 @@ export class TasksService {
   }
 
   async getOne(req: Request, _res: Response): Promise<TaskResponse> {
+    logMessage(`Fetching task with id: ${req.params.id}`, 'info');
     if (!req.params.id) {
       return {
         status: 400,
@@ -449,6 +452,7 @@ export class TasksService {
   }
 
   async update(req: Request, _res: Response): Promise<TaskResponse> {
+    logMessage(`Updating task with id: ${req.params.id}`, 'info');
     if (!req.params.id) {
       return {
         status: 400,
