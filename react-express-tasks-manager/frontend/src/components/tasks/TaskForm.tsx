@@ -22,8 +22,8 @@ import {
 import debounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useCreateTask, useTask, useUpdateTask } from '../../hooks/useTasks';
 import { useUser } from '../../hooks/useUser';
-import { tasksApi } from '../../services/tasksService';
 import { UsersService } from '../../services/usersService';
 import type { Task, TaskUser } from '../../types/Task';
 import type { User } from '../../types/User';
@@ -36,12 +36,14 @@ const TaskForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const [loading, setLoading] = useState(true);
-  const [errors, setErrors] = useState<string[] | null>(null);
   const [task, setTask] = useState<Task | null>(null);
   const [userOptions, setUserOptions] = useState<TaskUser[]>([]);
   const [userSearch, setUserSearch] = useState('');
   const [userLoading, setUserLoading] = useState(false);
+
+  const { data, isLoading, error } = useTask(id);
+  const createMutation = useCreateTask();
+  const updateMutation = useUpdateTask();
 
   // Debounced fetch for users
   const fetchUsers = useRef(
@@ -79,27 +81,17 @@ const TaskForm: React.FC = () => {
   }, [userSearch, fetchUsers, task?.assignedTo]);
 
   useEffect(() => {
-    if (id) {
-      tasksApi
-        .fetchOne(id)
-        .then((response) => {
-          setTask(response.data as Task);
-          setLoading(false);
-        })
-        .catch((error) => {
-          setErrors([error.message]);
-          setLoading(false);
-        });
-    } else {
+    if (id && data) {
+      setTask(data.data as Task);
+    } else if (!id) {
       setTask({} as Task);
-      setLoading(false);
     }
-  }, [id]);
+  }, [id, data]);
 
-  if (loading) return <Loading message="Loading task..." />;
+  if (isLoading) return <Loading message="Loading task..." />;
 
-  if (!loading && errors) {
-    return <Alert severity="error">Error: {errors.join(', ')}</Alert>;
+  if (error) {
+    return <Alert severity="error">Error: {error.message}</Alert>;
   }
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
@@ -131,11 +123,8 @@ const TaskForm: React.FC = () => {
       updatedBy: createdBy,
       updatedAt: new Date().toISOString(),
     };
-    const response = await tasksApi.create(taskToCreate);
-    if (response.status === 201) {
-      navigate(`/tasks/${response.data?.id}`);
-    }
-    void taskToCreate;
+
+    createMutation.mutate(taskToCreate);
   };
 
   const handleUpdate = async (): Promise<void> => {
@@ -155,11 +144,8 @@ const TaskForm: React.FC = () => {
       updatedBy,
       updatedAt: new Date().toISOString(),
     };
-    const response = await tasksApi.update(taskToSave.id, taskToSave);
-    if (response.status === 200) {
-      navigate(`/tasks/${response.data?.id}`);
-    }
-    void taskToSave;
+
+    updateMutation.mutate({ id: taskToSave.id, task: taskToSave });
   };
 
   const addTag = (e: React.KeyboardEvent<HTMLInputElement>) => {

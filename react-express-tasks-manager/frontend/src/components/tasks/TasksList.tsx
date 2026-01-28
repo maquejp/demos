@@ -1,7 +1,7 @@
 import { Alert, Grid, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-import { tasksApi } from '../../services/tasksService';
+import { useTasks } from '../../hooks/useTasks';
 import type { Task } from '../../types/Task';
 import Loading from '../Loading';
 import TaskItem from './TaskItem';
@@ -11,32 +11,19 @@ interface TasksTableProps {
 }
 
 const TasksList: React.FC<TasksTableProps> = ({ status }: TasksTableProps) => {
-  const [loading, setLoading] = useState(true);
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [errors, setErrors] = useState<string[] | null>(null);
+  const { data, isLoading, error } = useTasks(status);
 
-  useEffect(() => {
-    tasksApi
-      .fetchAll(status)
-      .then((response) => {
-        setTasks(response.data as Task[]);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setErrors([error.message]);
-        setLoading(false);
-      });
-  }, [status]);
+  if (isLoading) return <Loading message="Loading tasks..." />;
 
-  if (loading) return <Loading message="Loading tasks..." />;
-
-  if (!loading && errors) {
+  if (error) {
     return (
       <Alert severity="error" sx={{ mt: 2 }}>
-        Error: {errors.join(', ')}
+        Error: {error.message}
       </Alert>
     );
   }
+
+  const tasks = (data?.data as Task[]) || [];
 
   return (
     <Grid container spacing={2}>

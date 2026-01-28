@@ -1,6 +1,5 @@
+import { API_BASE_URL } from '../config/api';
 import type { User, UserResponse } from '../types/User';
-
-const API_BASE_URL = '/api';
 
 export class UsersService {
   static async getUserByEmail(email: string): Promise<UserResponse> {

@@ -13,10 +13,9 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useTask } from '../../hooks/useTasks';
 import { useUser } from '../../hooks/useUser';
-import { tasksApi } from '../../services/tasksService';
 import type { Task } from '../../types/Task';
 import { formatDate } from '../../utils/dateUtils';
 import { capitalizeEachWord } from '../../utils/stringUtils';
@@ -33,33 +32,20 @@ const TaskDetails: React.FC = () => {
   const { currentUser } = useUser();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-  const [task, setTask] = useState<Task | null>(null);
-  const [errors, setErrors] = useState<string[] | null>(null);
 
-  useEffect(() => {
-    if (!id) return;
-    tasksApi
-      .fetchOne(id)
-      .then((response) => {
-        setTask(response.data as Task);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setErrors([error.message]);
-        setLoading(false);
-      });
-  }, [id]);
+  const { data, isLoading, error } = useTask(id);
 
   if (!id) {
     return <Alert severity="error">Invalid task ID.</Alert>;
   }
 
-  if (loading) return <Loading message="Loading task details..." />;
+  if (isLoading) return <Loading message="Loading task details..." />;
 
-  if (!loading && errors) {
-    return <Alert severity="error">Error: {errors.join(', ')}</Alert>;
+  if (error) {
+    return <Alert severity="error">Error: {error.message}</Alert>;
   }
+
+  const task = data?.data as Task;
 
   if (!task) {
     return <Alert severity="warning">Task not found.</Alert>;
