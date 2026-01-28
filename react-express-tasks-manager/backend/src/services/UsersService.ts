@@ -1,45 +1,49 @@
-import type { User, UserResponse, UsersResponse } from '@/models/User';
-import { logMessage } from '@/utils/logger';
-import type { Request, Response } from 'express';
+import type { User, UserResponse, UsersResponse } from "@/models/User";
+import { logMessage } from "@/utils/logger";
+import type { Request, Response } from "express";
 
 export const users: User[] = [
   {
     id: 1,
-    name: 'Alex Johnson',
-    email: 'alex@example.com',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=alex',
-    role: 'admin',
-    createdAt: '2024-01-01T00:00:00.000Z',
+    name: "Alex Johnson",
+    email: "alex@example.com",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=alex",
+    role: "admin",
+    createdAt: "2024-01-01T00:00:00.000Z",
+    modifiedAt: "2024-01-01T00:00:00.000Z",
   },
   {
     id: 2,
-    name: 'Sarah Chen',
-    email: 'sarah@example.com',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sarah',
-    role: 'user',
-    createdAt: '2024-01-02T00:00:00.000Z',
+    name: "Sarah Chen",
+    email: "sarah@example.com",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=sarah",
+    role: "user",
+    createdAt: "2024-01-02T00:00:00.000Z",
+    modifiedAt: "2024-01-02T00:00:00.000Z",
   },
   {
     id: 3,
-    name: 'Mike Williams',
-    email: 'mike@example.com',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=mike',
-    role: 'user',
-    createdAt: '2024-01-03T00:00:00.000Z',
+    name: "Mike Williams",
+    email: "mike@example.com",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=mike",
+    role: "user",
+    createdAt: "2024-01-03T00:00:00.000Z",
+    modifiedAt: "2024-01-03T00:00:00.000Z",
   },
   {
     id: 4,
-    name: 'Emma Davis',
-    email: 'emma@example.com',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=emma',
-    role: 'user',
-    createdAt: '2024-01-04T00:00:00.000Z',
+    name: "Emma Davis",
+    email: "emma@example.com",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=emma",
+    role: "user",
+    createdAt: "2024-01-04T00:00:00.000Z",
+    modifiedAt: "2024-01-04T00:00:00.000Z",
   },
 ];
 
 export class UsersService {
   async getAll(req: Request, _res: Response): Promise<UsersResponse> {
-    logMessage('Fetching all users', 'info');
+    logMessage("Fetching all users", "info");
     let filteredUsers = users;
 
     // Filter by search query if provided
@@ -54,7 +58,7 @@ export class UsersService {
     // Exclude users by IDs if provided
     if (req?.query.ids) {
       const excludedIds = String(req.query.ids)
-        .split(',')
+        .split(",")
         .map((id) => Number(id.trim()))
         .filter((id) => !isNaN(id));
 
@@ -79,7 +83,7 @@ export class UsersService {
   }
 
   async getOne(req: Request, _res: Response): Promise<UserResponse> {
-    logMessage(`Fetching user with id: ${req.params.id}`, 'info');
+    logMessage(`Fetching user with id: ${req.params.id}`, "info");
     if (!req.params.id) {
       return {
         status: 400,
@@ -101,7 +105,7 @@ export class UsersService {
   }
 
   async getOneByEmail(req: Request, _res: Response): Promise<UserResponse> {
-    logMessage(`Fetching user with email: ${req.params.email}`, 'info');
+    logMessage(`Fetching user with email: ${req.params.email}`, "info");
     if (!req.params.email) {
       return {
         status: 400,

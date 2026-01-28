@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  app:
+    image: mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm
+    volumes:
+      - ..:/workspace/react-express-tasks-manager:cached
+      - node_modules:/workspace/react-express-tasks-manager/backend/node_modules
+      - frontend_node_modules:/workspace/react-express-tasks-manager/frontend/node_modules
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/tasks_manager
+      NODE_ENV: development
+    working_dir: /workspace/react-express-tasks-manager
+    command: sleep infinity
+    networks:
+      - tasks-network
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:18.1-bookworm
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: tasks_manager
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    ports:
+      - "15432:5432"
+    networks:
+      - tasks-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+  node_modules:
+  frontend_node_modules:
+
+networks:
+  tasks-network:
+    driver: bridge

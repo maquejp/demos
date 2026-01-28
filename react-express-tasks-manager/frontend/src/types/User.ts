@@ -3,8 +3,9 @@ export interface User {
   name: string;
   email: string;
   avatar?: string;
-  role: 'admin' | 'user';
+  role: "admin" | "user";
   createdAt: string;
+  modifiedAt: string;
 }
 
 export interface UsersResponse {

@@ -1,14 +1,12 @@
 {
   "name": "React-Express Tasks Manager Dev Container",
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
-  "mounts": [
-    // Speeds up I/O by keeping node_modules off the Mac host filesystem
-    "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/backend/node_modules,type=volume",
-    "source=${localWorkspaceFolderBasename}-frontend-node_modules,target=${containerWorkspaceFolder}/frontend/node_modules,type=volume"
-  ],
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace/react-express-tasks-manager",
   "forwardPorts": [
     3000,
-    5173
+    5173,
+    5432
   ],
   "postCreateCommand": "bash .devcontainer/postcreate.sh",
   // Start a tmux session named 'dev-logs' and run both apps in split windows, then attach
@@ -24,7 +22,6 @@
       "extensions": [
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "GitHub.copilot",
         "GitHub.copilot-chat",
         "GitHub.vscode-pull-request-github",
         "formulahendry.auto-rename-tag",
@@ -32,7 +29,8 @@
         "dsznajder.es7-react-js-snippets",
         "mhutchie.git-graph",
         "donjayamanne.githistory",
-        "vivaxy.vscode-conventional-commits"
+        "vivaxy.vscode-conventional-commits",
+        "ms-ossdata.vscode-pgsql"
       ]
     }
   },
