@@ -10,9 +10,9 @@
     3000,
     5173
   ],
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y tmux && sudo chown node backend/node_modules frontend/node_modules && npm install --prefix backend && npm install --prefix frontend",
-  // Start a tmux session named 'dev' and run both apps in split windows
-  "postStartCommand": "tmux new-session -d -s dev-logs 'npm run dev --prefix backend'; tmux split-window -h -t dev-logs 'npm run dev --prefix frontend'",
+  "postCreateCommand": "bash .devcontainer/postcreate.sh",
+  // Start a tmux session named 'dev-logs' and run both apps in split windows, then attach
+  "postStartCommand": "bash .devcontainer/poststart.sh",
   "customizations": {
     "vscode": {
       "settings": {
