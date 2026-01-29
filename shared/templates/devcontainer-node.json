@@ -1,0 +1,22 @@
+{
+  "name": "Node.js & TypeScript",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:18",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "postCreateCommand": "npm install",
+  "mounts": [
+    "type=bind,source=${localWorkspaceFolderBasename}-node_modules,target=type=volume,src=node_modules"
+  ],
+  "forwardPorts": [3000, 8080],
+  "remoteUser": "node"
+}

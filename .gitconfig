@@ -1,0 +1,10 @@
+# Git configuration for demos project
+[core]
+    autocrlf = input
+    safecrlf = true
+[init]
+    defaultBranch = main
+[push]
+    default = simple
+[pull]
+    rebase = false
