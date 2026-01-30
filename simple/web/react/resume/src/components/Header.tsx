@@ -1,5 +1,5 @@
-import React from 'react';
-import type { PersonalInfo } from '../types';
+import React from "react";
+import type { PersonalInfo } from "../types";
 
 interface HeaderProps extends PersonalInfo {}
 
@@ -23,9 +23,9 @@ const Header: React.FC<HeaderProps> = ({
               <div className="w-28 h-28 bg-linear-to-br from-primary-500 to-secondary-500 rounded-full flex items-center justify-center">
                 <span className="text-white text-4xl font-bold">
                   {name
-                    .split(' ')
+                    .split(" ")
                     .map((n) => n[0])
-                    .join('')}
+                    .join("")}
                 </span>
               </div>
             </div>

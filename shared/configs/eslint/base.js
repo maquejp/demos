@@ -13,6 +13,7 @@ export const baseConfig = [
         "error",
         { argsIgnorePattern: "^_" },
       ],
+      "@typescript-eslint/no-empty-object-type": "warn",
     },
   },
 ];

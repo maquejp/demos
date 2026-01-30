@@ -1,5 +1,5 @@
-import React from 'react';
-import type { Education, EducationSectionProps } from '../types';
+import React from "react";
+import type { Education, EducationSectionProps } from "../types";
 
 const EducationSection: React.FC<EducationSectionProps> = ({ education }) => {
   return (

@@ -1,5 +1,5 @@
-import React from 'react';
-import type { Experience, ExperienceSectionProps } from '../types';
+import React from "react";
+import type { Experience, ExperienceSectionProps } from "../types";
 
 const ExperienceSection: React.FC<ExperienceSectionProps> = ({
   experiences,
@@ -26,9 +26,9 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
                       <div className="w-12 h-12 bg-linear-to-br from-primary-500 to-secondary-500 rounded-full flex items-center justify-center">
                         <span className="text-white font-bold text-lg">
                           {exp.company
-                            .split(' ')
+                            .split(" ")
                             .map((n) => n[0])
-                            .join('')
+                            .join("")
                             .substring(0, 2)}
                         </span>
                       </div>
