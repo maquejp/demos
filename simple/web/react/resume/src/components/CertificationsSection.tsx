@@ -1,5 +1,5 @@
-import React from 'react';
-import type { Certification, CertificationsSectionProps } from '../types';
+import React from "react";
+import type { Certification, CertificationsSectionProps } from "../types";
 
 const CertificationsSection: React.FC<CertificationsSectionProps> = ({
   certifications,
