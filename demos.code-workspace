@@ -52,7 +52,8 @@
     },
     "conventionalCommits.scopes": [
       "simple-web-react-resume",
-      "simple-web-angular-resume"
+      "simple-web-angular-resume",
+      "GLOBAL"
     ]
   },
   "extensions": {
