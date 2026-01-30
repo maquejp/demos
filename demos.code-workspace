@@ -51,7 +51,8 @@
       "**/__pycache__": true
     },
     "conventionalCommits.scopes": [
-      "simple-web-react-resume"
+      "simple-web-react-resume",
+      "simple-web-angular-resume"
     ]
   },
   "extensions": {
