@@ -1,5 +1,16 @@
 {
   "name": "demos",
+  "version": "1.0.0",
+  "author": "Jean-Philippe Maquestiaux",
+  "description": "A collection of demo projects and experiments",
+  "keywords": [
+    "demos",
+    "projects",
+    "workspace",
+    "monorepo"
+  ],
+  "license": "MIT",
+  "packageManager": "npm@10.9.2",
   "private": true,
   "type": "module",
   "workspaces": [
@@ -11,6 +22,6 @@
     "typescript-eslint": "^8.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-config-prettier": "^9.0.0",
-    "prettier": "^3.0.0"
+    "prettier": "^3.8.1"
   }
 }
