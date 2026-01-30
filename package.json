@@ -17,20 +17,6 @@
     "simple/**/*",
     "containerized/**/*"
   ],
-  "scripts": {
-    "dev:angular": "npm run dev --workspace=simple-web-angular-resume",
-    "dev:react": "npm run dev --workspace=simple-web-react-resume",
-    "build:angular": "npm run build --workspace=simple-web-angular-resume",
-    "build:react": "npm run build --workspace=simple-web-react-resume",
-    "test:angular": "npm run test --workspace=simple-web-angular-resume",
-    "test:react": "npm run test --workspace=simple-web-react-resume",
-    "lint:angular": "npm run lint --workspace=simple-web-angular-resume",
-    "lint:react": "npm run lint --workspace=simple-web-react-resume",
-    "lint:fix:angular": "npm run lint:fix --workspace=simple-web-angular-resume",
-    "lint:fix:react": "npm run lint:fix --workspace=simple-web-react-resume",
-    "format:angular": "npm run format --workspace=simple-web-angular-resume",
-    "format:react": "npm run format --workspace=simple-web-react-resume"
-  },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
     "typescript-eslint": "^8.0.0",
