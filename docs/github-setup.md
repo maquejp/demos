@@ -30,3 +30,17 @@
 - Git changes visible inside containers
 - Docker volumes mounted correctly
 - GitHub CLI available in containers
+
+## GitHub Actions Setup
+
+### Branch Protection Rules
+
+- Require pull request reviews before merging
+  - At least one approval
+- Require status checks to pass before merging
+  - Require branches to be up to date before merging
+- Require conversation resolution before merging
+- Do not allow bypassing the above settings
+
+![Branch Protection Rules Part 1](./branch_protection_rules_001.png)
+![Branch Protection Rules Part 2](./branch_protection_rules_002.png)
