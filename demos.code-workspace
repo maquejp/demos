@@ -33,6 +33,13 @@
     "editor.insertSpaces": true,
     "git.enableSmartCommit": true,
     "git.autofetch": true,
+    "eslint.workingDirectories": [
+      "simple",
+      "containerized"
+    ],
+    "eslint.options": {
+      "configFile": "${workspaceFolder}/shared/configs/eslint/base.js"
+    },
     "files.exclude": {
       "**/.git": true,
       "**/.svn": true,
@@ -42,7 +49,10 @@
       "**/Thumbs.db": true,
       "**/node_modules": true,
       "**/__pycache__": true
-    }
+    },
+    "conventionalCommits.scopes": [
+      "simple-web-react-resume"
+    ]
   },
   "extensions": {
     "recommendations": [
