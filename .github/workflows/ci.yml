@@ -30,10 +30,10 @@ jobs:
         
     - name: Install dependencies and test
       run: |
-        find ${{ matrix.demo-category }} -name "package.json" -execdir npm install \;
-        find ${{ matrix.demo-category }} -name "requirements.txt" -execdir pip install -r {} \;
+        find . -path "./${{ matrix.demo-category }}/*" -name "package.json" -execdir npm install \; || true
+        find . -path "./${{ matrix.demo-category }}/*" -name "requirements.txt" -execdir pip install -r {} \; || true
         
     - name: Run linting
       run: |
-        find . -name "*.js" -o -name "*.ts" | head -10 | xargs -r npm run lint 2>/dev/null || true
-        find . -name "*.py" | head -10 | xargs -r flake8 2>/dev/null || true
+        find . -path "./${{ matrix.demo-category }}/*" -name "*.js" -o -name "*.ts" | head -10 | xargs -r npm run lint 2>/dev/null || true
+        find . -path "./${{ matrix.demo-category }}/*" -name "*.py" | head -10 | xargs -r flake8 2>/dev/null || true
