@@ -1,15 +1,28 @@
 {
-  "name": "resume",
-  "private": true,
+  "name": "simple-web-react-resume",
   "version": "0.0.0",
+  "author": "Jean-Philippe Maquestiaux",
+  "description": "A personal resume website built with React and TypeScript",
+  "keywords": [
+    "resume",
+    "portfolio",
+    "react",
+    "typescript",
+    "vite",
+    "tailwindcss"
+  ],
+  "license": "MIT",
+  "packageManager": "npm@10.9.2",
+  "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
-    "preview": "vite preview"
+    "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\""
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",

@@ -1,30 +1,31 @@
 {
-  "name": "resume",
+  "name": "simple-web-angular-resume",
   "version": "0.0.0",
+  "author": "Jean-Philippe Maquestiaux",
+  "description": "A personal resume website built with Angular and TypeScript",
+  "keywords": [
+    "resume",
+    "portfolio",
+    "angular",
+    "typescript",
+    "tailwindcss"
+  ],
+  "license": "MIT",
+  "packageManager": "npm@10.9.2",
+  "private": true,
   "type": "module",
   "scripts": {
-    "ng": "ng",
+    "dev": "ng serve",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "preview": "ng serve",
     "test": "ng test",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"src/**/*.{ts,html,css,md}\"",
+    "ng": "ng"
   },
-  "prettier": {
-    "printWidth": 100,
-    "singleQuote": true,
-    "overrides": [
-      {
-        "files": "*.html",
-        "options": {
-          "parser": "angular"
-        }
-      }
-    ]
-  },
-  "private": true,
-  "packageManager": "npm@10.9.2",
   "dependencies": {
     "@angular/common": "^21.1.0",
     "@angular/compiler": "^21.1.0",
@@ -50,6 +51,7 @@
     "eslint-plugin-prettier": "^5.5.5",
     "jsdom": "^27.1.0",
     "postcss": "^8.5.3",
+    "prettier": "^3.8.1",
     "tailwindcss": "^4.1.12",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
