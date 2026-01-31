@@ -1,0 +1,35 @@
+{
+  "name": "@react-express-tasks-manager/backend",
+  "version": "1.0.0",
+  "author": "Jean-Philippe Maquestiaux",
+  "description": "",
+  "keywords": [
+    "api",
+    "express",
+    "tasks",
+    "manager",
+    "typescript",
+    "kysely"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "packageManager": "npm@10.9.2",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "kysely": "^0.28.10"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.10.9",
+    "eslint-config-prettier": "^9.1.2",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "^3.8.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

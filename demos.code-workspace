@@ -53,7 +53,8 @@
     "conventionalCommits.scopes": [
       "simple-web-react-resume",
       "simple-web-angular-resume",
-      "GLOBAL"
+      "GLOBAL",
+      "containerized-web-react-tasksmanager"
     ]
   },
   "extensions": {
