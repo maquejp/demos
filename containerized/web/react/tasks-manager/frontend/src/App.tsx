@@ -1,35 +1,77 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Navigate, Route, Routes } from "react-router-dom";
+import { Box, Container, useTheme } from "@mui/material";
+
+import "./App.css";
+
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import WelcomePage from "./pages/WelcomePage";
+import LoginPage from "./pages/LoginPage";
+import { useUser } from "./hooks/useUser";
+import TaskDetails from "./components/tasks/TaskDetails";
+import TaskForm from "./components/tasks/TaskForm";
+import Loading from "./components/Loading";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const theme = useTheme();
+  const { currentUser, loading } = useUser();
+
+  // Show loading while checking authentication
+  if (loading) {
+    return <Loading message="Checking authentication..." />;
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Routes>
+      {/* Public routes */}
+      <Route
+        path="/login"
+        element={
+          currentUser ? (
+            <Navigate to="/" replace />
+          ) : (
+            <Box
+              sx={{
+                minHeight: "100vh",
+                backgroundColor: theme.palette.background.default,
+              }}
+            >
+              <LoginPage />
+              <Footer></Footer>
+            </Box>
+          )
+        }
+      />
+
+      {/* Protected routes - require authentication */}
+      <Route
+        path="/*"
+        element={
+          currentUser ? (
+            <Box
+              sx={{
+                minHeight: "100vh",
+                backgroundColor: theme.palette.background.default,
+              }}
+            >
+              <Header></Header>
+              <Container maxWidth="lg" sx={{ py: 4 }}>
+                <Routes>
+                  <Route path="/" element={<WelcomePage />} />
+                  <Route path="/tasks/add" element={<TaskForm />} />
+                  <Route path="/tasks/:id" element={<TaskDetails />} />
+                  <Route path="/tasks/:id/edit" element={<TaskForm />} />
+                </Routes>
+              </Container>
+              <Footer></Footer>
+            </Box>
+          ) : (
+            <Navigate to="/login" replace />
+          )
+        }
+      />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
