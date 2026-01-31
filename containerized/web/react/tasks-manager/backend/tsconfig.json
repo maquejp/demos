@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "target": "ES2023",
+        "module": "ESNext",
+        "moduleResolution": "bundler", // This is key for modern Node/Vite setups
+        "lib": [
+            "ES2023"
+        ],
+        "types": [
+            "node"
+        ],
+        "skipLibCheck": true,
+        /* Path Mapping without baseUrl */
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ]
+        },
+        /* Strictness & Modern ESM Defaults */
+        "strict": true,
+        "verbatimModuleSyntax": true,
+        "isolatedModules": true,
+        "moduleDetection": "force",
+        /* Output control */
+        "noEmit": true,
+        "rootDir": "src"
+    },
+    "include": [
+        "src/**/*.ts"
+    ]
+}
