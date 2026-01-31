@@ -2,7 +2,7 @@
   "name": "@react-express-tasks-manager/backend",
   "version": "1.0.0",
   "author": "Jean-Philippe Maquestiaux",
-  "description": "",
+  "description": "Backend API for React Express Tasks Manager application",
   "keywords": [
     "api",
     "express",
@@ -12,12 +12,18 @@
     "kysely"
   ],
   "license": "MIT",
-  "main": "index.js",
+  "main": "dist/server.js",
   "packageManager": "npm@10.9.2",
   "private": true,
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc --noEmit false",
+    "start": "node dist/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"src/**/*.ts\""
   },
   "dependencies": {
     "express": "^5.2.1",
